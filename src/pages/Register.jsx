@@ -11,7 +11,7 @@ function RegisterForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url("https://images.unsplash.com/photo-1552917690-2f32ed7c0823?q=80&w=3069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`;
+    document.body.style.backgroundImage = `url("https://wallpapers.com/images/hd/black-and-white-palm-tree-yzzqr0px3rfh9zwm.jpg")`;
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";
@@ -73,11 +73,11 @@ function RegisterForm() {
 
   return (
     <>
-      <div className="flex-1 min-h-screen p-6 mt-6 mb-6 bg-white sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="flex-1 min-h-screen p-6 mt-6 mb-6 bg-white opacity-60 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="w-full max-w-sm mx-auto">
-          <h2 className="mt-6 text-4xl font-thin leading-7 text-center text-gray-700">
+          <h1 className="mt-6 text-4xl font-thin leading-7 text-center text-gray-700">
             Register
-          </h2>
+          </h1>
         </div>
 
         <div className="mt-6">

@@ -6,7 +6,7 @@ function Footer() {
           <div className="mb-6 md:mb-0">
             <a href="https://flowbite.com/" className="flex items-center">
               <span className="self-center text-2xl font-thin whitespace-nowrap dark:text-white">
-                Hollidaze
+                <h1>Hollidaze</h1>
               </span>
             </a>
           </div>
@@ -18,7 +18,7 @@ function Footer() {
               <ul className="text-black dark:text-gray-400 font-thin">
                 <li className="mb-4">
                   <a href="https://flowbite.com/" className="hover:underline">
-                    Email: randomemail@gmail.com
+                    Email: user@gmail.com
                   </a>
                 </li>
                 <li>Custumer Service</li>

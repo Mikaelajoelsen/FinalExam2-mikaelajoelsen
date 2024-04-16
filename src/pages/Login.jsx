@@ -14,7 +14,7 @@ function LoginForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url("https://images.unsplash.com/photo-1552917690-2f32ed7c0823?q=80&w=3069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`;
+    document.body.style.backgroundImage = `url("https://wallpapers.com/images/hd/black-and-white-palm-tree-yzzqr0px3rfh9zwm.jpg")`;
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";
@@ -76,9 +76,12 @@ function LoginForm() {
   return (
     <>
       <div className="flex flex-col justify-center px-4 py-6 mt-6 mb-8 bg-white opacity-80 drop-shadow-xl sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-xl font-thin leading-9 text-center text-gray-700 sm:mt-8 sm:text-3xl">
-          Already have an account? Sign in here
-        </h2>
+        <h1 className="mt-6 text-xl font-thin leading-9 text-center text-black sm:mt-8 sm:text-3xl ">
+          Already have an account?
+        </h1>
+        <h1 className="mt-6 text-xl font-thin leading-9 text-center text-black sm:mt-8 sm:text-3xl ">
+          Sign in here
+        </h1>
         {isSuccess ? (
           <section>
             <p className="text-center text-red-900">
