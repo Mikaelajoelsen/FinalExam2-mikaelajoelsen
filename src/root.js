@@ -13,7 +13,8 @@ import Venuespage from "./pages/Venues";
 import Profilepage from "./pages/Profile";
 import Root from "./App";
 
-const rootRoute = new createRootRoute({
+// Instantiate the root route using createRootRoute
+const rootRoute = createRootRoute({
   component: Root,
 });
 
@@ -37,7 +38,7 @@ const registerRoute = createRoute({
 
 const venueRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/venue",
+  path: "/venue/:venueId",
   component: Venuepage,
 });
 
@@ -53,13 +54,13 @@ const makeRoute = createRoute({
   component: Makepage,
 });
 
-const ProfileRoute = createRoute({
+const profileRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/profile",
   component: Profilepage,
 });
 
-const MyVenuesRoute = createRoute({
+const myVenuesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/myvenues",
   component: Myvenuespage,
@@ -68,12 +69,12 @@ const MyVenuesRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
-  venuesRoute,
-  venueRoute,
   registerRoute,
+  venueRoute,
+  venuesRoute,
   makeRoute,
-  ProfileRoute,
-  MyVenuesRoute,
+  profileRoute,
+  myVenuesRoute,
 ]);
 
 export const router = createRouter({ routeTree });
