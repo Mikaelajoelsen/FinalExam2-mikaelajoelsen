@@ -13,7 +13,6 @@ import Venuespage from "./pages/Venues";
 import Profilepage from "./pages/Profile";
 import Root from "./App";
 
-// Instantiate the root route using createRootRoute
 const rootRoute = createRootRoute({
   component: Root,
 });
@@ -38,7 +37,7 @@ const registerRoute = createRoute({
 
 const venueRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/venue/:venueId",
+  path: "/venue/$venueid",
   component: Venuepage,
 });
 
