@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import GoogleMap from "../components/map";
 
 const initialVenueState = {
   id: "",
@@ -112,6 +113,9 @@ const VenuePage = () => {
             </>
           )}
         </div>
+      </div>
+      <div>
+        <GoogleMap lat={venue.location.lat} lng={venue.location.lng} />
       </div>
     </>
   );
