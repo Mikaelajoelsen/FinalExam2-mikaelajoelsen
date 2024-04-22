@@ -73,7 +73,7 @@ function RegisterForm() {
 
   return (
     <>
-      <div className="flex-1 min-h-screen p-6 mt-6 mb-6 bg-white opacity-60 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="flex-1 min-h-screen p-6 mt-6 mb-6 bg-white opacity-90 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="w-full max-w-sm mx-auto">
           <h1 className="mt-6 text-4xl font-thin leading-7 text-center text-gray-700">
             Register

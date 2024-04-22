@@ -48,7 +48,7 @@ const Venues = () => {
                 />
               </div>
               <div className="p-4">
-                <h2 className="text-xl font-semibold mb-2">{venue.name}</h2>
+                <h2 className="text-l font-semibold mb-2">{venue.name}</h2>
                 <div className="flex justify-between items-center">
                   <p className="text-gray-700">Price: {venue.price}</p>
                   <p className="text-gray-700">Rating: {venue.rating}</p>

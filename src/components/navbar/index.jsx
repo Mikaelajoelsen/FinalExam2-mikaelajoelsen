@@ -10,14 +10,13 @@ const navigation = [
   { name: "Dashboard", href: "#", current: false },
   { name: "LOGIN", href: "/login", current: false },
 ];
+export default function Navbar() {
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
-export default function Example() {
   return (
-    <Disclosure as="nav" className="bg-orange-50 opacity-70">
+    <Disclosure as="nav" className="bg-orange-50  z-10 relative">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

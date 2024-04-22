@@ -7,7 +7,7 @@ export default function Homepage() {
       <div className="h-mvh">
         <div className="relative sm:flex-shrink">
           <img
-            className="relative w-full h-svh"
+            className="w-full h-svh "
             src="https://images.unsplash.com/photo-1615571022219-eb45cf7faa9d?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Homepage background"
           />
@@ -29,7 +29,12 @@ export default function Homepage() {
           </div>
         </div>
       </div>
-      <div></div>
+      <div className="flex bg-orange-50 h-96 ">
+        <img
+          className="h-full rounded-b-full"
+          src="https://i.pinimg.com/564x/6d/bd/c4/6dbdc41e931d565394a5bb1ee9c21c55.jpg"
+        ></img>
+      </div>
       <div className="mt-24">
         <Venues />
       </div>
