@@ -28,7 +28,7 @@ class GoogleMap extends React.Component {
     return (
       <div className="absolute h-96 w-full">
         <APIProvider apiKey={"AIzaSyAY2tyOgEyJT3uZ2N259RzwG2iZHx0p9tU"}>
-          <Map center={position} zoom={10}>
+          <Map center={position} zoom={15}>
             <Marker position={position} />
           </Map>
         </APIProvider>

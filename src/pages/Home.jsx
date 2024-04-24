@@ -1,5 +1,7 @@
 import Venues from "./Venues";
+import Mostvisited from "../components/Mostvisited";
 import "@fontsource/la-belle-aurore";
+import Facilities from "../components/facilities";
 
 export default function Homepage() {
   return (
@@ -29,14 +31,14 @@ export default function Homepage() {
           </div>
         </div>
       </div>
-      <div className="flex bg-orange-50 h-96 ">
-        <img
-          className="h-full rounded-b-full"
-          src="https://i.pinimg.com/564x/6d/bd/c4/6dbdc41e931d565394a5bb1ee9c21c55.jpg"
-        ></img>
+      <div className="mt-6">
+        <Facilities />
       </div>
-      <div className="mt-24">
+      <div className="mt-2">
         <Venues />
+      </div>
+      <div>
+        <Mostvisited />
       </div>
     </>
   );

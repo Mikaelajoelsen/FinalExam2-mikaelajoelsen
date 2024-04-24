@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { FaHeart } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "@fontsource/la-belle-aurore";
 
 const Venues = () => {
   const [venues, setVenues] = useState([]);
   const [visibleVenues, setVisibleVenues] = useState([]);
   const [visibleCount, setVisibleCount] = useState(12);
+  const [filteredVenues, setFilteredVenues] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [checking, setChecking] = useState(null);
+  const [checkout, setCheckout] = useState(null);
+  const [totalGuests, setTotalGuests] = useState(1);
 
   useEffect(() => {
     const fetchVenues = async () => {
@@ -16,17 +23,43 @@ const Venues = () => {
         );
         const data = await response.json();
         setVenues(data);
+        setFilteredVenues(data);
+        setVisibleVenues(data.slice(0, visibleCount));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchVenues();
-  }, []);
+  }, [visibleCount]);
 
   useEffect(() => {
-    setVisibleVenues(venues.slice(0, visibleCount));
-  }, [venues, visibleCount]);
+    setFilteredVenues(
+      venues.filter((venue) =>
+        venue.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+  }, [venues, searchTerm]);
+
+  useEffect(() => {
+    setVisibleVenues(filteredVenues.slice(0, visibleCount));
+  }, [filteredVenues, visibleCount]);
+
+  const handleSearchChange = () => {
+    const filtered = venues.filter((venue) => {
+      const matchesChecking =
+        !checking || (venue.checking && venue.checking.includes(checking));
+      const matchesCheckout =
+        !checkout || (venue.checkout && venue.checkout.includes(checkout));
+      const matchesGuests = venue.adults + venue.kids <= totalGuests;
+      const matchesName = venue.name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      return matchesChecking && matchesCheckout && matchesGuests && matchesName;
+    });
+
+    setFilteredVenues(filtered);
+  };
 
   const handleViewMore = () => {
     setVisibleCount((prevCount) => prevCount + 12);
@@ -34,7 +67,48 @@ const Venues = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-3xl font-bold mb-8 text-center">Explore Venues</h1>
+      <div className="flex mt-10 mb-4 flex-wrap gap-3 ">
+        <input
+          type="text"
+          placeholder="Where are you going?"
+          className="flex w-42 p-2 border-b-2 border-black bg-inherit ml-4 md:w-80 lg:flex-start "
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <div className="ml-4">
+          <DatePicker
+            selected={checking}
+            onChange={(date) => setChecking(date)}
+            placeholderText="Checkin date"
+            className="p-2 border border-gray-200 bg-inherit"
+          />
+        </div>
+        <div className="ml-4">
+          <DatePicker
+            selected={checkout}
+            onChange={(date) => setCheckout(date)}
+            placeholderText="Checkout date"
+            className="p-2 border border-gray-200 bg-inherit"
+          />
+        </div>
+        <div className="ml-4 flex items-center">
+          <select
+            value={totalGuests}
+            onChange={(e) => setTotalGuests(parseInt(e.target.value))}
+            className="p-2 border border-gray-200 bg-inherit w-48"
+          >
+            {[...Array(11)].map((_, i) => (
+              <option key={i} value={i}>
+                {i} Guest{i !== 1 ? "s" : ""}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button
+          className="flex text-xl font-bold text-black bg-inherit"
+          onClick={handleSearchChange}
+        ></button>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {visibleVenues.map((venue) => (
           <Link key={venue.id} to={`/venue/${venue.id}`}>
@@ -58,10 +132,10 @@ const Venues = () => {
           </Link>
         ))}
       </div>
-      {visibleVenues.length < venues.length && (
+      {visibleVenues.length < filteredVenues.length && (
         <div className="flex justify-center mt-8">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded shadow-md hover:bg-blue-600"
+            className="bg-black text-white px-4 py-2 rounded shadow-md hover:bg-gray-600"
             onClick={handleViewMore}
           >
             View More
