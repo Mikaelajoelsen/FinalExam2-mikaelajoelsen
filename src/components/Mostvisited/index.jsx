@@ -30,7 +30,7 @@ export default function Mostvisited() {
           </Typography>
         </CardBody>
         <CardFooter className="flex flex-col items-center gap-2 pt-2">
-          <div className="flex items-center gap-2 font-bold text-blue-gray-500">
+          <div className="flex items-center gap-2 font-bold text-pink-600">
             {rated}.7
             <Rating value={4} onChange={(value) => setRated(value)} />
           </div>
@@ -95,7 +95,7 @@ export default function Mostvisited() {
           </Typography>
         </CardBody>
         <CardFooter className="flex flex-col items-center gap-2 pt-2">
-          <div className="flex items-center gap-2 font-bold text-blue-gray-500">
+          <div className="flex items-center gap-2 font-bold text-pink-600">
             {rated}.5
             <Rating value={4} onChange={(value) => setRated(value)} />
           </div>
@@ -160,7 +160,7 @@ export default function Mostvisited() {
           </Typography>
         </CardBody>
         <CardFooter className="flex flex-col items-center gap-2 pt-2">
-          <div className="flex items-center gap-2 font-bold text-blue-gray-500">
+          <div className="flex items-center gap-2 font-bold text-pink-600">
             {rated}.2
             <Rating value={4} onChange={(value) => setRated(value)} />
           </div>
@@ -225,7 +225,7 @@ export default function Mostvisited() {
           </Typography>
         </CardBody>
         <CardFooter className="flex flex-col items-center gap-2 pt-2">
-          <div className="flex items-center gap-2 font-bold text-blue-gray-500">
+          <div className="flex items-center gap-2 font-bold text-pink-600">
             {rated}.9
             <Rating value={4} onChange={(value) => setRated(value)} />
           </div>

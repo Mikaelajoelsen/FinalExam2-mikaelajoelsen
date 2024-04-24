@@ -79,7 +79,7 @@ const Venues = () => {
           <DatePicker
             selected={checking}
             onChange={(date) => setChecking(date)}
-            placeholderText="Checkin date"
+            placeholderText={"Checkin date "}
             className="p-2 border border-gray-200 bg-inherit"
           />
         </div>

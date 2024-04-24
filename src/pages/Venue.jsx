@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Typography } from "@material-tailwind/react";
 import { Rating } from "@material-tailwind/react";
+import Review from "../components/review";
 
 const initialVenueState = {
   id: "",
@@ -85,7 +86,7 @@ const VenuePage = () => {
       }
     };
 
-    fetchVenue(); // Call fetchVenue inside useEffect
+    fetchVenue();
   }, []);
 
   useEffect(() => {
@@ -108,20 +109,17 @@ const VenuePage = () => {
             alt=""
           />
         )}
-        <div className="flex items-center gap-2 font-bold text-blue-gray-500">
+        <div className="flex items-center gap-2 font-bold text-pink-600 mb-5">
           {rated}.5
           <Rating value={4} onChange={(value) => setRated(value)} />
         </div>
-        <Typography
-          color="blue-gray"
-          className="font-medium text-blue-gray-500"
-        >
+        <Typography color="blue-gray" className="font-medium text-black">
           Based on 202 Reviews
         </Typography>
         <div className="flex flex-col md:flex-row justify-between">
           {venue && (
             <div className="md:w-1/2 md:pr-4">
-              <h1 className="text-5xl font-bold mb-2 text-black">
+              <h1 className="text-5xl font-bold mb-2 mt-8 text-black">
                 {venue.name}
               </h1>
               <p className="mb-2 text-black">Created: {venue.created}</p>
@@ -154,23 +152,25 @@ const VenuePage = () => {
           )}
           <div className="md:w-1/2">
             <div className="rounded-xl bg-white text-gray-700 shadow-lg p-6">
-              <DatePicker
-                selected={checkInDate}
-                onChange={handleCheckInDateChange}
-                placeholderText="Select check-in date"
-                className="w-full py-2 px-4 mb-4 border rounded-md"
-              />
-              <DatePicker
-                selected={checkOutDate}
-                onChange={handleCheckOutDateChange}
-                placeholderText="Select check-out date"
-                className="w-full py-2 px-4 mb-4 border rounded-md"
-              />
+              <div className="flex flex-col justify-center ">
+                <DatePicker
+                  selected={checkInDate}
+                  onChange={handleCheckInDateChange}
+                  placeholderText="SELECT CHECKIN"
+                  className=" w-full py-2 px-4 mb-4 border rounded-md"
+                />
+                <DatePicker
+                  selected={checkOutDate}
+                  onChange={handleCheckOutDateChange}
+                  placeholderText="SELECT CHECKOUT"
+                  className="w-full py-2 px-4 mb-4 border rounded-md"
+                />
+              </div>
               <div className="flex items-center">
                 <select
                   value={totalGuests}
                   onChange={(e) => setTotalGuests(parseInt(e.target.value))}
-                  className="p-2 border border-gray-200 bg-inherit w-48"
+                  className="p-2 border border-gray-200 bg-inherit w-full"
                 >
                   {[...Array(11)].map((_, i) => (
                     <option key={i} value={i}>
@@ -179,14 +179,14 @@ const VenuePage = () => {
                   ))}
                 </select>
               </div>
-              <p className="text-center text-2xl font-semibold mb-4">
+              <p className="text-center text-2xl font-semibold mb-4 mt-6">
                 Price: ${venue.price} per night
               </p>
               <p className="text-center text-2xl font-semibold mb-4">
                 Total Price: ${totalPrice}
               </p>
               <button
-                className="block w-full select-none rounded-lg bg-pink-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                className="block w-full select-none rounded-lg bg-amber-50 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button"
                 onClick={handleReserveClick}
                 disabled={!matchesGuests}
@@ -195,6 +195,9 @@ const VenuePage = () => {
               </button>
             </div>
           </div>
+        </div>
+        <div className="mt-10">
+          <Review />
         </div>
       </div>
       <div className="w-full">
