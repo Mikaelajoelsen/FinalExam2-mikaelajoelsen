@@ -5,9 +5,9 @@ import { FaUser } from "react-icons/fa";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
-  { name: "About", href: "#", current: false },
+  { name: "Create", href: "/create", current: false },
   { name: "Location", href: "/venues", current: false },
-  { name: "Dashboard", href: "#", current: false },
+  { name: "Dashboard", href: "/myvenues", current: false },
   { name: "LOGIN", href: "/login", current: false },
 ];
 export default function Navbar() {

@@ -11,6 +11,10 @@ import { GiCampingTent } from "react-icons/gi";
 import { GiPisaTower } from "react-icons/gi";
 import { IoGolfSharp } from "react-icons/io5";
 import { MdEmojiFoodBeverage } from "react-icons/md";
+import { GiGrapes } from "react-icons/gi";
+import { GiCaveEntrance } from "react-icons/gi";
+import { GiWindmill } from "react-icons/gi";
+import { GrWheelchairActive } from "react-icons/gr";
 
 export default function facilities() {
   return (
@@ -66,6 +70,22 @@ export default function facilities() {
       <div className="flex flex-col items-center">
         <MdEmojiFoodBeverage className="text-xl" />
         <p className="font-xs items-center">Bed & Breakfast</p>
+      </div>
+      <div className="flex flex-col items-center">
+        <GiGrapes className="text-xl" />
+        <p className="font-xs items-center">Wine Yard</p>
+      </div>
+      <div className="flex flex-col items-center">
+        <GiCaveEntrance className="text-xl" />
+        <p className="font-xs items-center">Cave</p>
+      </div>
+      <div className="flex flex-col items-center">
+        <GiWindmill className="text-xl" />
+        <p className="font-xs items-center">Windmills</p>
+      </div>
+      <div className="flex flex-col items-center">
+        <GrWheelchairActive className="text-xl" />
+        <p className="font-xs items-center">WheelChair Friendly</p>
       </div>
     </div>
   );
