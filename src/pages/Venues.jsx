@@ -71,7 +71,7 @@ const Venues = () => {
         <input
           type="text"
           placeholder="Where are you going?"
-          className="flex w-42 p-2 border-b-2 border-black bg-inherit ml-4 md:w-80 lg:flex-start "
+          className="flex w-42 p-2 border-b border-black  bg-inherit ml-4 md:w-80 lg:flex-start "
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -80,7 +80,7 @@ const Venues = () => {
             selected={checking}
             onChange={(date) => setChecking(date)}
             placeholderText={"Checkin date "}
-            className="p-2 border border-gray-200 bg-inherit"
+            className="p-2 border-b  border-black bg-inherit"
           />
         </div>
         <div className="ml-4">
@@ -88,14 +88,14 @@ const Venues = () => {
             selected={checkout}
             onChange={(date) => setCheckout(date)}
             placeholderText="Checkout date"
-            className="p-2 border border-gray-200 bg-inherit"
+            className="p-2 border-b border-black bg-inherit"
           />
         </div>
         <div className="ml-4 flex items-center">
           <select
             value={totalGuests}
             onChange={(e) => setTotalGuests(parseInt(e.target.value))}
-            className="p-2 border border-gray-200 bg-inherit w-48"
+            className="p-2 border-b border-black bg-inherit w-48"
           >
             {[...Array(11)].map((_, i) => (
               <option key={i} value={i}>
@@ -109,11 +109,11 @@ const Venues = () => {
           onClick={handleSearchChange}
         ></button>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {visibleVenues.map((venue) => (
           <Link key={venue.id} to={`/venue/${venue.id}`}>
             <div className="relative bg-white rounded-lg shadow-md overflow-hidden">
-              <FaHeart className="absolute top-2 right-2 text-red-500 cursor-pointer" />
+              <FaHeart className="absolute top-2 right-2 text-inherit opacity-25 cursor-pointer" />
               <div className="h-48 overflow-hidden">
                 <img
                   src={venue.media[0]}
@@ -135,10 +135,10 @@ const Venues = () => {
       {visibleVenues.length < filteredVenues.length && (
         <div className="flex justify-center mt-8">
           <button
-            className="bg-black text-white px-4 py-2 rounded shadow-md hover:bg-gray-600"
+            className="bg-gray-50 text-gray-500 px-4 py-2 rounded-full h-28 w-28 shadow-md hover:bg-pink-100 mb-5"
             onClick={handleViewMore}
           >
-            View More
+            VIEW MORE{" "}
           </button>
         </div>
       )}

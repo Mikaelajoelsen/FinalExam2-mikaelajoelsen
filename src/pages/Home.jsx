@@ -2,6 +2,7 @@ import Venues from "./Venues";
 import Mostvisited from "../components/Mostvisited";
 import "@fontsource/la-belle-aurore";
 import Facilities from "../components/facilities";
+import Tips from "../components/tips";
 
 export default function Homepage() {
   return (
@@ -21,15 +22,24 @@ export default function Homepage() {
               Find The Perfect Place To Stay On Your Holiday
             </p>
             <div className="flex flex-wrap md:flex-row justify-center md:space-x-8">
-              <button className="  font-thin text-black bg-orange-100  px-4 py-2 shadow-lg hover:bg-yellow-50 mb-4 md:mb-0 w-full md:w-auto">
+              <button
+                to="/venues"
+                className="  font-thin rounded-full text-black bg-pink-100  px-4 py-2 shadow-lg hover:bg-pink-50 mb-4 md:mb-0 w-full md:w-auto shadow-black"
+              >
                 View Our Locations
               </button>
-              <button className="font-thin text-black bg-orange-100 px-4 py-2 shadow-md hover:bg-yellow-50 w-full md:w-auto">
+              <button
+                to="/myvenues"
+                className="font-thin text-black rounded-full bg-pink-100 px-4 py-2 shadow-md hover:bg-pink-50 w-full md:w-auto shadow-black"
+              >
                 Go to your bookings
               </button>
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Mostvisited />
       </div>
       <div className="mt-6">
         <Facilities />
@@ -38,7 +48,7 @@ export default function Homepage() {
         <Venues />
       </div>
       <div>
-        <Mostvisited />
+        <Tips />
       </div>
     </>
   );

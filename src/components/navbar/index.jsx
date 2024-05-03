@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaUser } from "react-icons/fa";
+import { Link } from "@tanstack/react-router";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -16,7 +17,7 @@ export default function Navbar() {
   }
 
   return (
-    <Disclosure as="nav" className="bg-orange-50  z-10 relative">
+    <Disclosure as="nav" className="bg-pink-50/50  z-10 relative">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -45,8 +46,8 @@ export default function Navbar() {
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-orange-50 text-black"
-                            : "text-black hover:bg-orange-100 font-thin hover:text-black",
+                            ? "bg-pink-50 text-black"
+                            : "text-black hover:bg-pink-100 font-thin hover:text-black",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}
@@ -60,7 +61,7 @@ export default function Navbar() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="relative rounded-full bg-orange-100  p-1 text-black hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="relative rounded-full bg-pink-100  p-1 text-black hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
@@ -89,9 +90,9 @@ export default function Navbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/myvenues"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
+                              active ? "bg-pink-100" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
@@ -101,28 +102,28 @@ export default function Navbar() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <Link
+                            to="/myvenue"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
+                              active ? "bg-pink-100" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
                             Your Venues
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <Link
+                            to="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
+                              active ? "bg-pink-100" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
                             Sign out
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>

@@ -37,6 +37,7 @@ function LoginForm() {
     const payload = {
       email: email.value,
       password: password.value,
+      venueManager: true,
     };
 
     try {
@@ -85,7 +86,7 @@ function LoginForm() {
         {isSuccess ? (
           <section>
             <p className="text-center text-red-900">
-              👋 Hi {data?.name}. You will now redirect to the home page!
+              👋 Hi {data?.name}. You are now registered as a venue manager!
             </p>
           </section>
         ) : (

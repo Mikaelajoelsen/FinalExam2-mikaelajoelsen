@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Typography } from "@material-tailwind/react";
 import { Rating } from "@material-tailwind/react";
 import Review from "../components/review";
+import PropTypes from "prop-types";
 
 const initialVenueState = {
   id: "",
@@ -33,7 +34,7 @@ const initialVenueState = {
   },
 };
 
-const VenuePage = () => {
+const VenuePage = ({ onBook }) => {
   const [venue, setVenue] = useState(initialVenueState);
   const [loading, setLoading] = useState(true);
   const [checkInDate, setCheckInDate] = useState(null);
@@ -41,6 +42,7 @@ const VenuePage = () => {
   const [totalGuests, setTotalGuests] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [rated, setRated] = useState(0);
+  const accessToken = localStorage.getItem("access_token");
 
   const handleCheckInDateChange = (date) => {
     setCheckInDate(date);
@@ -50,18 +52,8 @@ const VenuePage = () => {
     setCheckOutDate(date);
   };
 
-  const handleTotalPrice = () => {
-    if (checkInDate && checkOutDate) {
-      const nights = Math.ceil(
-        (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)
-      );
-      const price = venue.price;
-      setTotalPrice(nights * price * totalGuests);
-    }
-  };
-
-  const handleReserveClick = () => {
-    console.log("Reservation clicked!");
+  VenuePage.propTypes = {
+    onBook: PropTypes.func.isRequired,
   };
 
   useEffect(() => {
@@ -70,7 +62,13 @@ const VenuePage = () => {
         const pathSegments = window.location.pathname.split("/");
         const venueId = pathSegments[pathSegments.length - 1];
         const response = await fetch(
-          `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`
+          `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`, // Legg til et komma her
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
         );
 
         if (response.ok) {
@@ -90,8 +88,25 @@ const VenuePage = () => {
   }, []);
 
   useEffect(() => {
+    const handleTotalPrice = () => {
+      if (checkInDate && checkOutDate) {
+        const nights = Math.ceil(
+          (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)
+        );
+        const price = venue.price;
+        setTotalPrice(nights * price * totalGuests);
+      }
+    };
+
     handleTotalPrice();
-  }, [checkInDate, checkOutDate, totalGuests]);
+  }, [checkInDate, checkOutDate, totalGuests, venue.price]);
+
+  const handleReserveClick = () => {
+    console.log("Reservation clicked!");
+    if (onBook) {
+      onBook(venue);
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -109,7 +124,7 @@ const VenuePage = () => {
             alt=""
           />
         )}
-        <div className="flex items-center gap-2 font-bold text-pink-600 mb-5">
+        <div className="flex items-center gap-2 font-bold text-pink-900 mb-5">
           {rated}.5
           <Rating value={4} onChange={(value) => setRated(value)} />
         </div>
@@ -191,7 +206,7 @@ const VenuePage = () => {
                 onClick={handleReserveClick}
                 disabled={!matchesGuests}
               >
-                {matchesGuests ? "Reserve" : "Not enough capacity"}
+                {matchesGuests ? "Book" : "Not enough capacity"}
               </button>
             </div>
           </div>
@@ -207,4 +222,17 @@ const VenuePage = () => {
   );
 };
 
-export default VenuePage;
+const App = () => {
+  const handleBook = (venue) => {
+    console.log("Booking:", venue);
+    // Implement booking logic here
+  };
+
+  return (
+    <div>
+      <VenuePage onBook={handleBook} />
+    </div>
+  );
+};
+
+export default App;
