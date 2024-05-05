@@ -74,14 +74,12 @@ const MyVenuesPage = () => {
 
   return (
     <div>
-      <Profile />
       <div>
-        <h1 className="flex justify-center text-4xl font-thin text-black">
-          Your Venues
-        </h1>
-        <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
-          {venues && venues.length > 0 ? (
-            venues.map((venue) => (
+        <Profile />
+      </div>
+      <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 mb-10 m-5">
+        {venues && venues.length > 0
+          ? venues.map((venue) => (
               <div
                 key={venue.id}
                 className="w-full max-w-xs overflow-hidden bg-white shadow-lg rounded-t-xl"
@@ -123,10 +121,7 @@ const MyVenuesPage = () => {
                 </div>
               </div>
             ))
-          ) : (
-            <div>No venues found.</div>
-          )}
-        </div>
+          : ""}
       </div>
     </div>
   );

@@ -66,16 +66,16 @@ const Venues = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto ">
       <div className="flex mt-10 mb-4 flex-wrap gap-3 ">
         <input
           type="text"
           placeholder="Where are you going?"
-          className="flex w-42 p-2 border-b border-black  bg-inherit ml-4 md:w-80 lg:flex-start "
+          className="flex w-42 p-2 border-b border-black  text-black bg-inherit ml-4 md:w-80 lg:flex-start "
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <div className="ml-4">
+        <div className="ml-4 ">
           <DatePicker
             selected={checking}
             onChange={(date) => setChecking(date)}
@@ -88,14 +88,14 @@ const Venues = () => {
             selected={checkout}
             onChange={(date) => setCheckout(date)}
             placeholderText="Checkout date"
-            className="p-2 border-b border-black bg-inherit"
+            className="p-2 border-b border-black bg-inherit "
           />
         </div>
         <div className="ml-4 flex items-center">
           <select
             value={totalGuests}
             onChange={(e) => setTotalGuests(parseInt(e.target.value))}
-            className="p-2 border-b border-black bg-inherit w-48"
+            className="p-2 border-b border-black bg-inherit w-48 text-gray-400"
           >
             {[...Array(11)].map((_, i) => (
               <option key={i} value={i}>
@@ -105,7 +105,7 @@ const Venues = () => {
           </select>
         </div>
         <button
-          className="flex text-xl font-bold text-black bg-inherit"
+          className="flex text-xl font-bold  bg-inherit"
           onClick={handleSearchChange}
         ></button>
       </div>
@@ -124,8 +124,8 @@ const Venues = () => {
               <div className="p-4">
                 <h2 className="text-l font-semibold mb-2">{venue.name}</h2>
                 <div className="flex justify-between items-center">
-                  <p className="text-gray-700">Price: {venue.price}</p>
-                  <p className="text-gray-700">Rating: {venue.rating}</p>
+                  <p className="text-black">Price: {venue.price}</p>
+                  <p className="text-black">Rating: {venue.rating}</p>
                 </div>
               </div>
             </div>
@@ -135,7 +135,7 @@ const Venues = () => {
       {visibleVenues.length < filteredVenues.length && (
         <div className="flex justify-center mt-8">
           <button
-            className="bg-gray-50 text-gray-500 px-4 py-2 rounded-full h-28 w-28 shadow-md hover:bg-pink-100 mb-5"
+            className="bg-gray-50 text-black px-4 py-2 rounded-full h-28 w-28 shadow-md hover:bg-pink-100 mb-5"
             onClick={handleViewMore}
           >
             VIEW MORE{" "}

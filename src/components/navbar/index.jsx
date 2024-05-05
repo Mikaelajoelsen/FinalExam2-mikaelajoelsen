@@ -7,9 +7,9 @@ import { Link } from "@tanstack/react-router";
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Create", href: "/create", current: false },
-  { name: "Location", href: "/venues", current: false },
+  { name: "Venues", href: "/venues", current: false },
   { name: "Dashboard", href: "/myvenues", current: false },
-  { name: "LOGIN", href: "/login", current: false },
+  { name: "Login", href: "/login", current: false },
 ];
 export default function Navbar() {
   function classNames(...classes) {

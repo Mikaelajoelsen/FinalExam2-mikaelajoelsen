@@ -82,73 +82,53 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="w-full flex justify-center ">
-      <div className="flex flex-col bg-white border max-w-md border-white backdrop-hue-rotate-90  m-20 drop-shadow-2xl  dark:bg-orange-300 dark:border-orange-500 md:w-1/2">
-        <div className=" w-full h-54">
+    <section className="flex items-center justify-center min-h-screen drop-shadow-xl">
+      <div className="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg">
+        <div className="flex items-center justify-center mb-6">
           {avatar ? (
-            <img src={avatar} alt="Avatar" className=" w-full mb-2  md:mr-4" />
+            <img
+              src={avatar}
+              alt="Avatar"
+              className="w-32 h-32 mb-3 rounded-full"
+            />
           ) : (
-            <div className="flex justify-center m-20">
-              <FaImage className="flex justify-center" />
+            <div className="flex items-center justify-center w-32 h-32 bg-gray-200 rounded-full">
+              <FaImage className="text-gray-400" size={64} />
             </div>
           )}
         </div>
-        <div className="p-5">
-          <div className="mb-3">
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              Username:
-            </p>
-            <p>{profileData?.name}</p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              Email: {profileData?.email}
-            </p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              Bio: {profileData?.bio}
-            </p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              Number of Venues: {profileData?._count?.venues}
-            </p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              Number of Bookings: {profileData?._count?.bookings}
-            </p>
-          </div>
-          <div className="flex flex-col items-center md:flex-row">
-            {avatar && (
-              <img
-                src={avatar}
-                alt="Avatar"
-                className="w-16 h-16 mb-2 rounded-full md:mr-4"
+        <div className="mb-6 text-center">
+          <h2 className="text-xl font-semibold">{profileData?.name}</h2>
+          <p className="text-gray-500">{profileData?.email}</p>
+          <p className="text-gray-500">{profileData?.bio}</p>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700">
+              Upload New Avatar (URL or File)
+            </label>
+            <div className="flex items-center">
+              <input
+                type="text"
+                className="block w-full mt-1 form-input rounded-l-md"
+                placeholder="Enter URL or choose a file"
+                value={newAvatar || ""}
+                onChange={handleAvatarChange}
               />
-            )}
-            <form onSubmit={handleSubmit} className="flex flex-col">
-              <label className="text-sm font-bold text-black">
-                Upload New Avatar (URL or File):
-              </label>
-              <div className="flex flex-col items-center md:flex-row">
-                <input
-                  className="w-full px-2 py-1 mb-2 border border-black md:mb-0 md:mr-2"
-                  type="text"
-                  placeholder="Enter URL or choose a file"
-                  value={newAvatar || ""}
-                  onChange={handleAvatarChange}
-                />
-                <button
-                  type="submit"
-                  className="w-full px-4 py-2 font-thin text-white border border-black rounded-md md:w-auto bg-black hover:bg-red-400"
-                >
-                  Update
-                </button>
-              </div>
-            </form>
+              <button
+                type="submit"
+                className="px-4 py-2 ml-1 text-black bg-pink-100 rounded-full"
+              >
+                Update
+              </button>
+            </div>
           </div>
           {isAvatarUpdated && (
-            <div className="mt-2 text-green-500">
-              Avatar updated successfully! &#x2713;
-            </div>
+            <div className="text-green-500">Avatar updated successfully!</div>
           )}
-        </div>
+        </form>
       </div>
-    </div>
+    </section>
   );
 };
 
