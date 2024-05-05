@@ -3,6 +3,7 @@ import Mostvisited from "../components/Mostvisited";
 import "@fontsource/la-belle-aurore";
 import Facilities from "../components/facilities";
 import Tips from "../components/tips";
+import Newsletter from "../components/newsletter";
 
 export default function Homepage() {
   return (
@@ -14,7 +15,7 @@ export default function Homepage() {
             src="https://images.unsplash.com/photo-1615571022219-eb45cf7faa9d?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Homepage background"
           />
-          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center p-4 bg-black bg-opacity-50">
+          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center p-4 bg-white bg-opacity-50">
             <h1 className="mt-24 text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-la-belle-aurore mb-4 text-center">
               Find Your Dream Location
             </h1>
@@ -49,6 +50,9 @@ export default function Homepage() {
       </div>
       <div>
         <Tips />
+      </div>
+      <div>
+        <Newsletter />
       </div>
     </>
   );

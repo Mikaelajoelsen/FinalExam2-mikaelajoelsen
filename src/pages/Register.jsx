@@ -36,6 +36,7 @@ function RegisterForm() {
       email: email.value,
       avatar: avatar?.value,
       password: password.value,
+      venueManager: true,
     };
 
     console.log(payload);

@@ -134,7 +134,7 @@ const VenuePage = ({ onBook }) => {
         <div className="flex flex-col md:flex-row justify-between">
           {venue && (
             <div className="md:w-1/2 md:pr-4">
-              <h1 className="text-5xl font-bold mb-2 mt-8 text-black">
+              <h1 className="text-3xl font-bold mb-2 mt-8 text-black">
                 {venue.name}
               </h1>
               <p className="mb-2 text-black">Created: {venue.created}</p>

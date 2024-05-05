@@ -26,6 +26,7 @@ export default function CreateVenuePage() {
       lng: 0,
     },
   });
+
   console.log(formData);
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");

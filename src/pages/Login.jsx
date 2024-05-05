@@ -37,7 +37,6 @@ function LoginForm() {
     const payload = {
       email: email.value,
       password: password.value,
-      venueManager: true,
     };
 
     try {

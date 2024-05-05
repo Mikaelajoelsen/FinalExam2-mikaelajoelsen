@@ -23,7 +23,7 @@ const MyVenuesPage = () => {
         );
         const data = await res.json();
 
-        console.log("Fetched venues:", data); // Log fetched data
+        console.log("Fetched venues:", data);
 
         if (Array.isArray(data)) {
           setVenues(data);
@@ -47,7 +47,7 @@ const MyVenuesPage = () => {
 
     try {
       const res = await fetch(
-        `https://api.noroff.dev/api/v1/holidaze/venue/${venueId}`,
+        `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`,
         {
           method: "DELETE",
           headers: {
@@ -74,11 +74,11 @@ const MyVenuesPage = () => {
 
   return (
     <div>
-      <h1 className="flex justify-center text-4xl font-thin text-black">
-        Your Venues
-      </h1>
       <Profile />
       <div>
+        <h1 className="flex justify-center text-4xl font-thin text-black">
+          Your Venues
+        </h1>
         <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
           {venues && venues.length > 0 ? (
             venues.map((venue) => (
@@ -88,7 +88,7 @@ const MyVenuesPage = () => {
               >
                 <div className="relative" style={{ paddingBottom: "100%" }}>
                   <img
-                    src={venue.media[0]?.url}
+                    src={venue.media[0]}
                     alt={venue.name}
                     className="absolute object-cover w-full h-full"
                     loading="lazy"
@@ -96,7 +96,24 @@ const MyVenuesPage = () => {
                 </div>
                 <div className="flex flex-col items-center px-6 py-4 text-black">
                   <h2 className="mb-2 text-xl font-bold">{venue.name}</h2>
-                  <p className="text-base text-gray-700">{venue.description}</p>
+                  <p className="text-base text-gray-700">
+                    Description:{venue.description}
+                  </p>
+                  <p className="text-base text-gray-700">Price:{venue.price}</p>
+                  <p className="text-base text-gray-700">
+                    Guests: {venue.maxGuests}
+                  </p>
+                  <p className="text-base text-gray-700">
+                    Rating: {venue.rating}
+                  </p>
+                  <p className="text-base text-gray-700">
+                    Facilities: {venue.meta.wifi}
+                  </p>
+                  <p className="text-base text-gray-700">
+                    {venue.meta.parking}
+                  </p>
+                  <p className="text-base text-gray-700">{venue.meta.pets}</p>
+
                   <button
                     onClick={() => handleDeleteVenue(venue.id)}
                     className="px-4 py-2 font-thin text-black rounded bg-inherit hover:bg-red-200"
