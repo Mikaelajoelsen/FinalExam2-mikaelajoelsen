@@ -75,7 +75,7 @@ function LoginForm() {
 
   return (
     <>
-      <div className="flex flex-col justify-center px-4 py-6 mt-6 mb-8 bg-white opacity-90 drop-shadow-xl sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="flex flex-col justify-center px-4 py-6 mt-6 mb-8 bg-white drop-shadow-xl sm:mx-auto sm:w-full sm:max-w-md">
         <h1 className="mt-6 text-xl font-thin leading-9 text-center text-black sm:mt-8 sm:text-3xl ">
           Already have an account?
         </h1>
@@ -85,7 +85,7 @@ function LoginForm() {
         {isSuccess ? (
           <section>
             <p className="text-center text-red-900">
-              👋 Hi {data?.name}. You will now redirect to the home page!
+              👋 Hi {data?.name}. You are now registered as a venue manager!
             </p>
           </section>
         ) : (

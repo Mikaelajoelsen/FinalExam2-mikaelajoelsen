@@ -10,7 +10,6 @@ import Myvenuespage from "./pages/Myvenues";
 import Registerpage from "./pages/Register";
 import Venuepage from "./pages/Venue";
 import Venuespage from "./pages/Venues";
-import Profilepage from "./pages/Profile";
 import Root from "./App";
 
 const rootRoute = createRootRoute({
@@ -53,12 +52,6 @@ const makeRoute = createRoute({
   component: Makepage,
 });
 
-const profileRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/profile",
-  component: Profilepage,
-});
-
 const myVenuesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/myvenues",
@@ -72,7 +65,6 @@ const routeTree = rootRoute.addChildren([
   venueRoute,
   venuesRoute,
   makeRoute,
-  profileRoute,
   myVenuesRoute,
 ]);
 
