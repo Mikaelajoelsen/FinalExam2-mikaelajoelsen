@@ -225,7 +225,6 @@ const VenuePage = ({ onBook }) => {
 const App = () => {
   const handleBook = (venue) => {
     console.log("Booking:", venue);
-    // Implement booking logic here
   };
 
   return (

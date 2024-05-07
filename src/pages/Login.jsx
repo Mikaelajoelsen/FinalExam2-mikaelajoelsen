@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { FaFacebook } from "react-icons/fa";
@@ -12,16 +11,6 @@ function LoginForm() {
   const [data, setData] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    document.body.style.backgroundImage = `url("https://wallpapers.com/images/hd/black-and-white-palm-tree-yzzqr0px3rfh9zwm.jpg")`;
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundPosition = "center";
-    return () => {
-      document.body.style.backgroundImage = "none";
-    };
-  }, []);
 
   const navigateToHome = () => {
     setTimeout(() => {
@@ -75,7 +64,7 @@ function LoginForm() {
 
   return (
     <>
-      <div className="flex flex-col justify-center px-4 py-6 mt-6 mb-8 bg-white drop-shadow-xl sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="flex flex-col justify-center px-4 py-6 mt-6 mb-8 bg-gradient-to-r from-pink-200 to-violet-200 drop-shadow-xl sm:mx-auto sm:w-full sm:max-w-md rounded-lg">
         <h1 className="mt-6 text-xl font-thin leading-9 text-center text-black sm:mt-8 sm:text-3xl ">
           Already have an account?
         </h1>
@@ -106,7 +95,7 @@ function LoginForm() {
                 type="email"
                 autoComplete="email"
                 required
-                className="w-full h-12 px-4 mt-1 text-gray-900 placeholder-white border shadow-sm focus:outline-none focus:ring focus:border-zinc-600 sm:text-lg"
+                className="w-full h-12 px-4 mt-1 text-gray-900 placeholder-white border rounded-full shadow-sm focus:outline-none focus:ring focus:border-zinc-600 sm:text-lg"
                 placeholder="email/username 
                 "
               />
@@ -131,7 +120,7 @@ function LoginForm() {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="w-full h-12 px-4 mt-1 text-gray-900 placeholder-white border  shadow-sm focus:outline-none focus:ring focus:border-gray-600 sm:text-lg"
+                className="w-full h-12 px-4 mt-1 text-gray-900 placeholder-white border  shadow-sm focus:outline-none focus:ring focus:border-gray-600 sm:text-lg rounded-full"
                 placeholder="password"
               />
             </div>
@@ -140,7 +129,7 @@ function LoginForm() {
               <button
                 disabled={isLoading}
                 type="submit"
-                className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black rounded-full shadow-sm bg-orange-50 hover:bg-orange-100 focus:outline-none focus:ring focus:border-zinc-600"
+                className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black rounded-full shadow-sm bg-pink-300 hover:bg-inherit focus:outline-none focus:ring focus:border-zinc-600"
               >
                 {isLoading ? "signing in" : "Sign in"}
               </button>
@@ -157,7 +146,7 @@ function LoginForm() {
             <div className="flex justify-center w-full mt-4 w-86">
               <Link
                 to="/register"
-                className="flex justify-center w-full px-3 py-4 text-lg font-thin leading-6 text-center text-black border border-black rounded-full shadow-sm hover:bg-orange-100 w-86 hover:from-pink-800 hover:to-pink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white-200"
+                className="flex justify-center w-full px-3 py-4 text-lg font-thin leading-6 text-center text-black border border-black rounded-full shadow-sm hover:bg-pink-300 w-86 hover:from-pink-800 hover:to-pink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white-200"
               >
                 Register
               </Link>

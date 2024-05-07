@@ -11,13 +11,20 @@ const navigation = [
   { name: "Dashboard", href: "/myvenues", current: false },
   { name: "Login", href: "/login", current: false },
 ];
+
 export default function Navbar() {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 
+  function logout() {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("user_email");
+  }
+
   return (
-    <Disclosure as="nav" className="bg-pink-50/50  z-10 relative">
+    <Disclosure as="nav" className="bg-purple-50  z-10 relative">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -86,13 +93,13 @@ export default function Navbar() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-purple-50 py-1 drop-shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
                           <a
                             href="/myvenues"
                             className={classNames(
-                              active ? "bg-pink-100" : "",
+                              active ? "bg-purple-100" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
@@ -105,7 +112,7 @@ export default function Navbar() {
                           <Link
                             to="/myvenue"
                             className={classNames(
-                              active ? "bg-pink-100" : "",
+                              active ? "bg-purple-100" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
@@ -116,9 +123,10 @@ export default function Navbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            to="#"
+                            to="/login"
+                            onClick={logout}
                             className={classNames(
-                              active ? "bg-pink-100" : "",
+                              active ? "bg-purple-100" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >

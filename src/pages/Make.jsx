@@ -106,13 +106,15 @@ export default function CreateVenuePage() {
     });
   };
   return (
-    <div className="max-w-4xl p-8 mx-auto mt-5 mb-5 border-2-black drop-shadow-md">
-      <h1 className="mb-6 text-4xl font-thin">Create a Venue</h1>
+    <div className="max-w-4xl p-8 mx-auto mt-5 mb-5 bg-white opacity-90 inset-0 rounded-md border-gradient-to-br from-pink-50 via-red-50 to-pink-50 drop-shadow-xl ">
+      <h1 className="flex justify-center mb-6 text-4xl font-thin">
+        Create a Venue
+      </h1>
       <form onSubmit={createVenue}>
         <div className="mb-4">
           <label
             htmlFor="name"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 "
           >
             Name:
           </label>
@@ -120,7 +122,7 @@ export default function CreateVenuePage() {
             type="text"
             id="name"
             name="name"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.name}
             onChange={handleInputChange}
             required
@@ -137,7 +139,7 @@ export default function CreateVenuePage() {
           <textarea
             id="description"
             name="description"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.description}
             onChange={handleInputChange}
             required
@@ -147,7 +149,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="media"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             Media URL:
           </label>
@@ -156,7 +158,7 @@ export default function CreateVenuePage() {
               type="text"
               id="media"
               name="media"
-              className="w-full p-2 mt-1 border rounded-md"
+              className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
               onChange={previewImage}
             />
             {imagePreviewUrl && (
@@ -172,7 +174,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="price"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             Price:
           </label>
@@ -180,7 +182,7 @@ export default function CreateVenuePage() {
             type="number"
             id="price"
             name="price"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.price}
             onChange={handleInputChange}
             required
@@ -190,7 +192,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="maxGuests"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             Maximum Guests:
           </label>
@@ -198,17 +200,17 @@ export default function CreateVenuePage() {
             type="number"
             id="maxGuests"
             name="maxGuests"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.maxGuests}
             onChange={handleInputChange}
             required
           />
         </div>
 
-        <div className="mb-4">
+        <div className=" mb-4">
           <label
             htmlFor="rating"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             Rating:
           </label>
@@ -216,7 +218,7 @@ export default function CreateVenuePage() {
             type="number"
             id="rating"
             name="rating"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.rating}
             onChange={handleInputChange}
           />
@@ -269,7 +271,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="address"
-            className="text-xl font-medium text-gray-700 "
+            className="text-xl font-medium text-gray-700 bg-inherit"
           >
             Address:
           </label>
@@ -277,7 +279,7 @@ export default function CreateVenuePage() {
             type="text"
             id="address"
             name="location.address"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.location.address}
             onChange={handleInputChange}
           />
@@ -285,7 +287,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="city"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             City:
           </label>
@@ -293,7 +295,7 @@ export default function CreateVenuePage() {
             type="text"
             id="city"
             name="location.city"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.location.city}
             onChange={handleInputChange}
           />
@@ -301,7 +303,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="zip"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             Zip:
           </label>
@@ -309,7 +311,7 @@ export default function CreateVenuePage() {
             type="text"
             id="zip"
             name="location.zip"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.location.zip}
             onChange={handleInputChange}
           />
@@ -317,7 +319,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="country"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             Country:
           </label>
@@ -325,7 +327,7 @@ export default function CreateVenuePage() {
             type="text"
             id="country"
             name="location.country"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.location.country}
             onChange={handleInputChange}
           />
@@ -333,7 +335,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="continent"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             Continent:
           </label>
@@ -341,7 +343,7 @@ export default function CreateVenuePage() {
             type="text"
             id="continent"
             name="location.continent"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.location.continent}
             onChange={handleInputChange}
           />
@@ -349,7 +351,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="latitude"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             Latitude:
           </label>
@@ -357,7 +359,7 @@ export default function CreateVenuePage() {
             type="number"
             id="latitude"
             name="location.lat"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.location.lat}
             onChange={handleInputChange}
           />
@@ -365,7 +367,7 @@ export default function CreateVenuePage() {
         <div className="mb-4">
           <label
             htmlFor="longitude"
-            className="block text-xl font-medium text-gray-700"
+            className="block text-xl font-medium text-gray-700 bg-inherit"
           >
             Longitude:
           </label>
@@ -373,7 +375,7 @@ export default function CreateVenuePage() {
             type="number"
             id="longitude"
             name="location.lng"
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
             value={formData.location.lng}
             onChange={handleInputChange}
           />
@@ -382,7 +384,7 @@ export default function CreateVenuePage() {
         <div className="flex justify-center mt-6">
           <button
             type="submit"
-            className="px-6 py-2 font-thin text-black rounded-full  bg-pink-50 hover:bg-pink-100 focus:outline-none focus:ring focus:border-gray-300"
+            className="px-6 py-2 font-thin text-black drop-shadow-md  bg-white hover:opacity-90 inset-0 hover:bg-gradient-to-br from-pink-100 via-pink-50 to-violet-100 focus:outline-none focus:ring focus:border-gray-300 rounded-full"
           >
             Create Venue
           </button>

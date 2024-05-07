@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { FaHeart } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Facilities from "../components/facilities";
 import "@fontsource/la-belle-aurore";
 
 const Venues = () => {
@@ -67,6 +68,9 @@ const Venues = () => {
 
   return (
     <div className="container mx-auto ">
+      <div className="mt-6">
+        <Facilities />
+      </div>
       <div className="flex mt-10 mb-4 flex-wrap gap-3 ">
         <input
           type="text"
@@ -135,7 +139,7 @@ const Venues = () => {
       {visibleVenues.length < filteredVenues.length && (
         <div className="flex justify-center mt-8">
           <button
-            className="bg-gray-50 text-black px-4 py-2 rounded-full h-28 w-28 shadow-md hover:bg-pink-100 mb-5"
+            className="bg-gray-50 text-black px-4 py-2 rounded-full h-28 w-28 shadow-md hover:bg-gradient-to-br from-pink-100 via-pink-50 to-violet-100 mb-5"
             onClick={handleViewMore}
           >
             VIEW MORE{" "}

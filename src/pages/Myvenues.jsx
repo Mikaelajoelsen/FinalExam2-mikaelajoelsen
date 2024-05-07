@@ -6,6 +6,16 @@ const MyVenuesPage = () => {
   const [venues, setVenues] = useState([]);
 
   useEffect(() => {
+    document.body.style.backgroundImage = `url("https://wallpapers.com/images/hd/black-and-white-palm-tree-yzzqr0px3rfh9zwm.jpg")`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center";
+    return () => {
+      document.body.style.backgroundImage = "none";
+    };
+  }, []);
+
+  useEffect(() => {
     const fetchVenues = async () => {
       setIsLoading(true);
       const name = localStorage.getItem("name");
@@ -75,9 +85,15 @@ const MyVenuesPage = () => {
   return (
     <div>
       <div>
+        <h1 className="flex justify-center text-black p-10 text-3xl">
+          YOUR PROFILE
+        </h1>
         <Profile />
       </div>
-      <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 mb-10 m-5">
+      <h1 className="flex justify-center mt-1 py-2 text-3xl ">
+        YOUR VENUES AND BOOKINGS
+      </h1>
+      <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 mb-10 m-5 ">
         {venues && venues.length > 0
           ? venues.map((venue) => (
               <div
@@ -92,7 +108,7 @@ const MyVenuesPage = () => {
                     loading="lazy"
                   />
                 </div>
-                <div className="flex flex-col items-center px-6 py-4 text-black">
+                <div className="flex flex-col items-center px-6 py-4 text-black drop-shadow-2xl">
                   <h2 className="mb-2 text-xl font-bold">{venue.name}</h2>
                   <p className="text-base text-gray-700">
                     Description:{venue.description}

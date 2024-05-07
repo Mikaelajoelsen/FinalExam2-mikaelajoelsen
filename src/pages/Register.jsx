@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useNavigate } from "@tanstack/react-router";
@@ -9,16 +8,6 @@ function RegisterForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    document.body.style.backgroundImage = `url("https://wallpapers.com/images/hd/black-and-white-palm-tree-yzzqr0px3rfh9zwm.jpg")`;
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundPosition = "center";
-    return () => {
-      document.body.style.backgroundImage = "none";
-    };
-  }, []);
 
   const navigateToLogin = () => {
     setTimeout(() => {
@@ -74,7 +63,7 @@ function RegisterForm() {
 
   return (
     <>
-      <div className="flex-1 min-h-screen p-6 mt-6 mb-6 bg-white  sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="flex-1 min-h-screen p-6 mt-6 mb-6 bg-white  sm:mx-auto sm:w-full sm:max-w-md bg-gradient-to-r from-pink-300 to-violet-200 rounded-lg ">
         <div className="w-full max-w-sm mx-auto">
           <h1 className="mt-6 text-4xl font-thin leading-7 text-center text-black">
             Register
@@ -138,7 +127,7 @@ function RegisterForm() {
                 <div className="flex items-center justify-between">
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium text-gray-900"
+                    className="text-sm font-medium text-gray-900"
                   ></label>
                 </div>
                 <input
@@ -147,7 +136,7 @@ function RegisterForm() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="w-full h-12 px-4 mt-1 text-gray-900 placeholder-gray-400 border  shadow-sm focus:outline-none focus:ring focus:border-gray-600"
+                  className="w-full h-12 px-4 mt-1 text-gray-900 placeholder-gray-400 border  shadow-sm focus:outline-none focus:ring focus:border-gray-600 rounded-full"
                   placeholder="Password"
                 />
               </div>
@@ -170,7 +159,7 @@ function RegisterForm() {
               <div className="mt-6">
                 <button
                   type="submit"
-                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-white rounded-full shadow-sm bg-zinc-500 hover:bg-gray-500 focus:outline-none focus:ring focus:border-zinc-600"
+                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black rounded-full shadow-sm bg-pink-50/50 hover:bg-pink-200 focus:outline-none focus:ring focus:border-zinc-600"
                 >
                   Register
                 </button>
@@ -188,7 +177,7 @@ function RegisterForm() {
               <div className="mt-2">
                 <Link
                   to="/login"
-                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black border border-black rounded-full shadow-sm hover:bg-zinc-200 focus:outline-none focus:ring focus:border-zinc-600"
+                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black border border-black rounded-full shadow-sm hover:bg-pink-200 focus:outline-none focus:ring focus:border-zinc-600"
                 >
                   {isLoading ? "Registering" : "Login"}
                 </Link>
