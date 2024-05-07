@@ -106,7 +106,7 @@ export default function CreateVenuePage() {
     });
   };
   return (
-    <div className="max-w-4xl p-8 mx-auto mt-5 mb-5 bg-white opacity-90 inset-0 rounded-md border-gradient-to-br from-pink-50 via-red-50 to-pink-50 drop-shadow-xl ">
+    <div className="max-w-xl p-8 mx-auto mt-5 mb-5 bg-white opacity-90 inset-0 rounded-md border-gradient-to-br from-pink-50 via-red-50 to-pink-50 drop-shadow-xl ">
       <h1 className="flex justify-center mb-6 text-4xl font-thin">
         Create a Venue
       </h1>

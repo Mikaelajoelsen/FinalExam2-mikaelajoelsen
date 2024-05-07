@@ -62,9 +62,9 @@ const VenuePage = ({ onBook }) => {
         const pathSegments = window.location.pathname.split("/");
         const venueId = pathSegments[pathSegments.length - 1];
         const response = await fetch(
-          `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`, // Legg til et komma her
+          `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}/bookings`,
           {
-            method: "GET",
+            method: "POST",
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },

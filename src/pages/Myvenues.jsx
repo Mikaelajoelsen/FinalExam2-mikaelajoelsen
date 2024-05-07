@@ -90,7 +90,7 @@ const MyVenuesPage = () => {
         </h1>
         <Profile />
       </div>
-      <h1 className="flex justify-center mt-1 py-2 text-3xl ">
+      <h1 className="flex justify-center mt- py-2 text-3xl ">
         YOUR VENUES AND BOOKINGS
       </h1>
       <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 mb-10 m-5 ">

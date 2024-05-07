@@ -20,7 +20,7 @@ const Venues = () => {
     const fetchVenues = async () => {
       try {
         const response = await fetch(
-          "https://api.noroff.dev/api/v1/holidaze/venues"
+          "https://api.noroff.dev/api/v1/holidaze/venues?sort=created&sortOrder=desc"
         );
         const data = await response.json();
         setVenues(data);
