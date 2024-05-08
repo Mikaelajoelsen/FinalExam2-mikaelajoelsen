@@ -19,16 +19,14 @@ function RegisterForm() {
     event.preventDefault();
 
     const { email, password, name, avatar } = event.target.elements;
-    console.log(email, password, name, avatar);
+
     const payload = {
       name: name.value,
       email: email.value,
-      avatar: avatar?.value,
+      avatar: avatar.value,
       password: password.value,
       venueManager: true,
     };
-
-    console.log(payload);
 
     try {
       const res = await fetch(
@@ -47,12 +45,12 @@ function RegisterForm() {
         setErrorMessage(resJSON.errors[0].message);
       } else {
         localStorage.setItem("email", email.value);
+        localStorage.setItem("avatar", avatar.value);
         setIsSuccess(res.ok);
         navigateToLogin();
       }
     } catch (error) {
       console.warn("An error occurred", error);
-
       setError(error);
     } finally {
       setIsLoading(false);

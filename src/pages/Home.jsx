@@ -25,13 +25,13 @@ export default function Homepage() {
             <div className="flex flex-wrap md:flex-row justify-center md:space-x-8">
               <button
                 to="/venues"
-                className="  font-thin rounded-full text-black bg-purple-50  px-4 py-2 shadow-lg hover:opacity-90 inset-0 hover:bg-gradient-to-br from-pink-100 via-pink-50 to-purple-50 mb-4 md:mb-0 w-full md:w-auto shadow-black"
+                className="  font-thin rounded-full text-black bg-white  px-4 py-2 shadow-lg hover:opacity-90 inset-0 hover:bg-gradient-to-br from-orange-100 via-orange-50 to-yellow-50 mb-4 md:mb-0 w-full md:w-auto shadow-black"
               >
                 View Our Locations
               </button>
               <button
                 to="/myvenues"
-                className="font-thin text-black rounded-full bg-purple-50 px-4 py-2 shadow-md hover:opacity-90 inset-0 hover:bg-gradient-to-br from-pink-100 via-pink-50 to-purple-50 w-full md:w-auto shadow-black"
+                className="font-thin text-black rounded-full bg-white px-4 py-2 shadow-md hover:opacity-90 inset-0 hover:bg-gradient-to-br from-orange-100 via-orange-50 to-yellow-50 w-full md:w-auto shadow-black"
               >
                 Go to your bookings
               </button>

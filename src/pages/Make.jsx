@@ -27,8 +27,6 @@ export default function CreateVenuePage() {
     },
   });
 
-  console.log(formData);
-
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
 
   const createVenue = async (event) => {
@@ -105,291 +103,283 @@ export default function CreateVenuePage() {
       media: [imageUrl],
     });
   };
+
   return (
-    <div className="max-w-xl p-8 mx-auto mt-5 mb-5 bg-white opacity-90 inset-0 rounded-md border-gradient-to-br from-pink-50 via-red-50 to-pink-50 drop-shadow-xl ">
-      <h1 className="flex justify-center mb-6 text-4xl font-thin">
-        Create a Venue
-      </h1>
-      <form onSubmit={createVenue}>
-        <div className="mb-4">
-          <label
-            htmlFor="name"
-            className="block text-xl font-medium text-gray-700 "
-          >
-            Name:
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.name}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="block text-xl font-medium text-gray-700"
-          >
-            Description:
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.description}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="media"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Media URL:
-          </label>
-          <div className="mb-4">
+    <div className=" max-w-6xl mx-auto p-1 relative rounded-md mt-5">
+      <div className="p-8 bg-white rounded-md">
+        <h1 className="text-5xl font-thin text-start mb-4">Create a Venue</h1>
+        <form onSubmit={createVenue} className="grid gap-4">
+          <div>
+            <label htmlFor="name" className="block text-gray-700 font-semibold">
+              Name:
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-gray-700 font-semibold"
+            >
+              Description:
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+              value={formData.description}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="media"
+              className="block text-gray-700 font-semibold"
+            >
+              Media URL:
+            </label>
             <input
               type="text"
               id="media"
               name="media"
-              className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
+              className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
               onChange={previewImage}
             />
             {imagePreviewUrl && (
               <img
                 src={imagePreviewUrl}
                 alt="Image Preview"
-                className="rounded-md max-h-32 mt-2"
+                className="mt-2 rounded-md"
               />
             )}
           </div>
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="price"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Price:
-          </label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.price}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="maxGuests"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Maximum Guests:
-          </label>
-          <input
-            type="number"
-            id="maxGuests"
-            name="maxGuests"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.maxGuests}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className=" mb-4">
-          <label
-            htmlFor="rating"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Rating:
-          </label>
-          <input
-            type="number"
-            id="rating"
-            name="rating"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.rating}
-            onChange={handleInputChange}
-          />
-        </div>
-        <p className="block text-xl font-medium text-gray-700">Amenities:</p>
-
-        <div className="flex flex-wrap justify-between mb-8 ">
-          <label className="inline-flex items-center mt-1">
+          <div>
+            <label
+              htmlFor="price"
+              className="block text-gray-700 font-semibold"
+            >
+              Price:
+            </label>
             <input
-              type="checkbox"
-              className="w-5 h-5 text-pink-600 form-checkbox"
-              name="wifi"
-              checked={formData.meta.wifi}
+              type="number"
+              id="price"
+              name="price"
+              className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+              value={formData.price}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="maxGuests"
+              className="block text-gray-700 font-semibold"
+            >
+              Maximum Guests:
+            </label>
+            <input
+              type="number"
+              id="maxGuests"
+              name="maxGuests"
+              className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+              value={formData.maxGuests}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="rating"
+              className="block text-gray-700 font-semibold"
+            >
+              Rating:
+            </label>
+            <input
+              type="number"
+              id="rating"
+              name="rating"
+              className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+              value={formData.rating}
               onChange={handleInputChange}
             />
-            <span className="ml-2">Wi-Fi</span>
-          </label>
-          <label className="inline-flex items-center mt-1">
-            <input
-              type="checkbox"
-              className="w-5 h-5 text-pink-600 form-checkbox"
-              name="parking"
-              checked={formData.meta.parking}
-              onChange={handleInputChange}
-            />
-            <span className="ml-2">Parking</span>
-          </label>
-          <label className="inline-flex items-center mt-1">
-            <input
-              type="checkbox"
-              className="w-5 h-5 text-pink-600 form-checkbox"
-              name="breakfast"
-              checked={formData.meta.breakfast}
-              onChange={handleInputChange}
-            />
-            <span className="ml-2">Breakfast</span>
-          </label>
-          <label className="inline-flex items-center mt-1">
-            <input
-              type="checkbox"
-              className="w-5 h-5 text-pink-600 form-checkbox"
-              name="pets"
-              checked={formData.meta.pets}
-              onChange={handleInputChange}
-            />
-            <span className="ml-2">Pets</span>
-          </label>
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="address"
-            className="text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Address:
-          </label>
-          <input
-            type="text"
-            id="address"
-            name="location.address"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.location.address}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="city"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            City:
-          </label>
-          <input
-            type="text"
-            id="city"
-            name="location.city"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.location.city}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="zip"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Zip:
-          </label>
-          <input
-            type="text"
-            id="zip"
-            name="location.zip"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.location.zip}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="country"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Country:
-          </label>
-          <input
-            type="text"
-            id="country"
-            name="location.country"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.location.country}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="continent"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Continent:
-          </label>
-          <input
-            type="text"
-            id="continent"
-            name="location.continent"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.location.continent}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="latitude"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Latitude:
-          </label>
-          <input
-            type="number"
-            id="latitude"
-            name="location.lat"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.location.lat}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="longitude"
-            className="block text-xl font-medium text-gray-700 bg-inherit"
-          >
-            Longitude:
-          </label>
-          <input
-            type="number"
-            id="longitude"
-            name="location.lng"
-            className="w-full p-2 mt-1 border-b-2 border-white bg-inherit drop-shadow-lg"
-            value={formData.location.lng}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="flex justify-center mt-6">
-          <button
-            type="submit"
-            className="px-6 py-2 font-thin text-black drop-shadow-md  bg-white hover:opacity-90 inset-0 hover:bg-gradient-to-br from-pink-100 via-pink-50 to-violet-100 focus:outline-none focus:ring focus:border-gray-300 rounded-full"
-          >
-            Create Venue
-          </button>
-        </div>
-      </form>
+          </div>
+          <div>
+            <p className="text-lg font-bold text-gray-700 mb-2">Amenities:</p>
+            <div className="flex flex-wrap">
+              <label className="inline-flex items-center mr-4 mb-2">
+                <input
+                  type="checkbox"
+                  className="w-5 h-5 text-orange-50 form-checkbox"
+                  name="wifi"
+                  checked={formData.meta.wifi}
+                  onChange={handleInputChange}
+                />
+                <span className="ml-2">Wi-Fi</span>
+              </label>
+              <label className="inline-flex items-center mr-4 mb-2">
+                <input
+                  type="checkbox"
+                  className="w-5 h-5 text-orange-200 form-checkbox"
+                  name="parking"
+                  checked={formData.meta.parking}
+                  onChange={handleInputChange}
+                />
+                <span className="ml-2">Parking</span>
+              </label>
+              <label className="inline-flex items-center mr-4 mb-2">
+                <input
+                  type="checkbox"
+                  className="w-5 h-5 text-orange-50 form-checkbox"
+                  name="breakfast"
+                  checked={formData.meta.breakfast}
+                  onChange={handleInputChange}
+                />
+                <span className="ml-2">Breakfast</span>
+              </label>
+              <label className="inline-flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  className="w-5 h-5 text-orange-100 form-checkbox"
+                  name="pets"
+                  checked={formData.meta.pets}
+                  onChange={handleInputChange}
+                />
+                <span className="ml-2">Pets</span>
+              </label>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                htmlFor="address"
+                className="block text-gray-700 font-semibold"
+              >
+                Address:
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="location.address"
+                className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+                value={formData.location.address}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="city"
+                className="block text-gray-700 font-semibold"
+              >
+                City:
+              </label>
+              <input
+                type="text"
+                id="city"
+                name="location.city"
+                className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+                value={formData.location.city}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="zip"
+                className="block text-gray-700 font-semibold"
+              >
+                Zip:
+              </label>
+              <input
+                type="text"
+                id="zip"
+                name="location.zip"
+                className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+                value={formData.location.zip}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="country"
+                className="block text-gray-700 font-semibold"
+              >
+                Country:
+              </label>
+              <input
+                type="text"
+                id="country"
+                name="location.country"
+                className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+                value={formData.location.country}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="continent"
+                className="block text-gray-700 font-semibold"
+              >
+                Continent:
+              </label>
+              <input
+                type="text"
+                id="continent"
+                name="location.continent"
+                className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+                value={formData.location.continent}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="latitude"
+                className="block text-gray-700 font-semibold"
+              >
+                Latitude:
+              </label>
+              <input
+                type="number"
+                id="latitude"
+                name="location.lat"
+                className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
+                value={formData.location.lat ? "" : formData.location.lat}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="longitude"
+                className="block text-gray-700 font-semibold"
+              >
+                Longitude:
+              </label>
+              <input
+                type="number"
+                id="longitude"
+                name="location.lng"
+                className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-black"
+                value={formData.location.lng}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+          <div className="flex justify-center mt-4">
+            <button
+              type="submit"
+              className="px-6 py-2 bg-purple-50 font-thin text-black rounded-full hover:bg-gradient-to-br from-purple-50 via-purple-100 to-purple-200 hover:text-xl focus:outline-none focus:ring focus:border-pink-300"
+            >
+              Create Venue
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

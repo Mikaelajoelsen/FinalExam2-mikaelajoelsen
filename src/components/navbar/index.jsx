@@ -24,7 +24,7 @@ export default function Navbar() {
   }
 
   return (
-    <Disclosure as="nav" className="bg-purple-50  z-10 relative">
+    <Disclosure as="nav" className="bg-stone-50  z-10 relative">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -53,8 +53,8 @@ export default function Navbar() {
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-pink-50 text-black"
-                            : "text-black hover:bg-pink-100 font-thin hover:text-black",
+                            ? "hover:bg-stone-100 text-black"
+                            : "text-black hover:bg-stone-100 font-thin hover:text-black",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}
@@ -68,7 +68,7 @@ export default function Navbar() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="relative rounded-full bg-pink-100  p-1 text-black hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="relative rounded-full bg-stone-100  p-1 text-black hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
@@ -93,13 +93,13 @@ export default function Navbar() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-purple-50 py-1 drop-shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 drop-shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
                           <a
                             href="/myvenues"
                             className={classNames(
-                              active ? "bg-purple-100" : "",
+                              active ? "bg-stone-100" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
@@ -112,7 +112,7 @@ export default function Navbar() {
                           <Link
                             to="/myvenue"
                             className={classNames(
-                              active ? "bg-purple-100" : "",
+                              active ? "bg-stone-100" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
@@ -126,7 +126,7 @@ export default function Navbar() {
                             to="/login"
                             onClick={logout}
                             className={classNames(
-                              active ? "bg-purple-100" : "",
+                              active ? "bg-stone-100" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >

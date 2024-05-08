@@ -67,24 +67,24 @@ const Venues = () => {
   };
 
   return (
-    <div className="container mx-auto ">
+    <div className="container mx-auto">
       <div className="mt-6">
         <Facilities />
       </div>
-      <div className="flex mt-10 mb-4 flex-wrap gap-3 ">
+      <div className="flex border border-black rounded-full mt-10 mb-4 flex-wrap gap-3">
         <input
           type="text"
           placeholder="Where are you going?"
-          className="flex w-42 p-2 border-b border-black  text-black bg-inherit ml-4 md:w-80 lg:flex-start "
+          className="flex w-42 p-2  bg-white text-black ml-4 md:w-80 lg:flex-start"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <div className="ml-4 ">
+        <div className="ml-4">
           <DatePicker
             selected={checking}
             onChange={(date) => setChecking(date)}
             placeholderText={"Checkin date "}
-            className="p-2 border-b  border-black bg-inherit"
+            className="p-2  border-l border-black  bg-white text-black"
           />
         </div>
         <div className="ml-4">
@@ -92,14 +92,14 @@ const Venues = () => {
             selected={checkout}
             onChange={(date) => setCheckout(date)}
             placeholderText="Checkout date"
-            className="p-2 border-b border-black bg-inherit "
+            className="p-2 border-l border-black  bg-white text-black"
           />
         </div>
         <div className="ml-4 flex items-center">
           <select
             value={totalGuests}
             onChange={(e) => setTotalGuests(parseInt(e.target.value))}
-            className="p-2 border-b border-black bg-inherit w-48 text-gray-400"
+            className="p-2 border-l border-black bg-white text-black w-48"
           >
             {[...Array(11)].map((_, i) => (
               <option key={i} value={i}>
@@ -109,7 +109,7 @@ const Venues = () => {
           </select>
         </div>
         <button
-          className="flex text-xl font-bold  bg-inherit"
+          className="flex text-xl font-bold bg-white text-black"
           onClick={handleSearchChange}
         ></button>
       </div>
@@ -130,6 +130,7 @@ const Venues = () => {
                 <div className="flex justify-between items-center">
                   <p className="text-black">Price: {venue.price}</p>
                   <p className="text-black">Rating: {venue.rating}</p>
+                  <p className="text-black">Location: {venue.location.city}</p>
                 </div>
               </div>
             </div>
@@ -139,7 +140,7 @@ const Venues = () => {
       {visibleVenues.length < filteredVenues.length && (
         <div className="flex justify-center mt-8">
           <button
-            className="bg-gray-50 text-black px-4 py-2 rounded-full h-28 w-28 shadow-md hover:bg-gradient-to-br from-pink-100 via-pink-50 to-violet-100 mb-5"
+            className="bg-gray-50 text-black px-4 py-2 rounded-full h-28 w-28 shadow-md hover:bg-gradient-to-br from-purple-50 via-purple-50 to-pink-50 mb-5"
             onClick={handleViewMore}
           >
             VIEW MORE{" "}

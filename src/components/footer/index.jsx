@@ -4,12 +4,12 @@ function Footer() {
       <div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
-            fill="rgb(250 245 255)"
+            fill="#fafaf9"
             fillOpacity="1"
             d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           ></path>
         </svg>
-        <div className="bg-purple-50 p-10">
+        <div className="bg-stone-50 p-10">
           <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8"></div>
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
@@ -95,7 +95,7 @@ function Footer() {
                 <h2 className="mb-6 text-sm font-thin text-black uppercase dark:text-white">
                   Contact
                 </h2>
-                <ul className="text-black dark:text-gray-400 font-thin">
+                <ul className="text-black dark:text-black font-thin">
                   <li className="mb-4">
                     <a href="https://flowbite.com/" className="hover:underline">
                       Email: user@gmail.com
@@ -162,7 +162,7 @@ function Footer() {
               </div>
             </div>
           </div>
-          <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+          <hr className="my-6 border-black sm:mx-auto dark:border-gray-700 lg:my-8" />
         </div>
       </div>
     </footer>
