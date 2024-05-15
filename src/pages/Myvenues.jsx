@@ -6,7 +6,7 @@ const MyVenuesPage = () => {
   const [venues, setVenues] = useState([]);
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url("https://wallpapers.com/images/hd/black-and-white-palm-tree-yzzqr0px3rfh9zwm.jpg")`;
+    document.body.style.backgroundColor = "#FEFEFE";
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";
@@ -77,15 +77,12 @@ const MyVenuesPage = () => {
   return (
     <div>
       <div>
-        <h1 className="flex justify-center text-black p-10 text-3xl">
-          YOUR PROFILE
-        </h1>
         <Profile />
       </div>
-      <h1 className="flex justify-center mt- py-2 text-3xl ">
+      <h3 className="flex justify-center py-2 text-3xl font-thin">
         YOUR VENUES AND BOOKINGS
-      </h1>
-      <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 mb-10 m-5 ">
+      </h3>
+      <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 mb-10 m-5">
         {venues && venues.length > 0 ? (
           venues.map((venue) => (
             <div
@@ -122,7 +119,7 @@ const MyVenuesPage = () => {
 
                 <button
                   onClick={() => handleDeleteVenue(venue.id)}
-                  className="px-4 py-2 font-thin text-black rounded bg-inherit hover:bg-red-200"
+                  className="px-4 py-2 font-thin text-black rounded bg-inherit hover:border border-red-500"
                 >
                   Delete
                 </button>
@@ -130,7 +127,7 @@ const MyVenuesPage = () => {
             </div>
           ))
         ) : (
-          <div>No venues found.</div>
+          <div>No venues yet</div>
         )}
       </div>
     </div>

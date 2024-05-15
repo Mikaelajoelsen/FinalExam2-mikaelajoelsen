@@ -71,7 +71,7 @@ const Venues = () => {
       <div className="mt-6">
         <Facilities />
       </div>
-      <div className="flex border border-black rounded-full mt-10 mb-4 flex-wrap gap-3">
+      <div className="flex border mt-10 mb-4 flex-wrap gap-3">
         <input
           type="text"
           placeholder="Where are you going?"
@@ -138,9 +138,9 @@ const Venues = () => {
         ))}
       </div>
       {visibleVenues.length < filteredVenues.length && (
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-8 font-thin">
           <button
-            className="bg-gray-50 text-black px-4 py-2 rounded-full h-28 w-28 shadow-md hover:bg-gradient-to-br from-purple-50 via-purple-50 to-pink-50 mb-5"
+            className="bg-gray-50 text-black px-4 py-2 rounded-full h-28 w-28 shadow-md hover:bg-gradient-to-br from-stone-200 via-stone-100 to-stone-50 mb-5"
             onClick={handleViewMore}
           >
             VIEW MORE{" "}

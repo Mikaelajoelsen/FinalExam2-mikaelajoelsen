@@ -14,12 +14,11 @@ export default function Mostvisited() {
 
   return (
     <div className="flex flex-wrap py-8 mt-8 justify-center gap-4 drop-shadow-xl">
-      <Card className="w-64 h-full drop-shadow-xl">
-        <CardHeader className="h-80 mt-3">
+      <Card className="w-64 h-full rounded-t-full  drop-shadow-xl">
+        <CardHeader className="h-80 rounded-t-full">
           <img
             src="https://images.unsplash.com/photo-1525596662741-e94ff9f26de1?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="profile-picture"
-            className="w-64"
           />
         </CardHeader>
         <CardBody className="text-center">
@@ -79,12 +78,11 @@ export default function Mostvisited() {
         </CardFooter>
       </Card>
 
-      <Card className="w-64 h-full drop-shadow-xl">
-        <CardHeader className="h-80 mt-3">
+      <Card className="w-64 h-full rounded-t-full drop-shadow-xl ">
+        <CardHeader className="h-80 rounded-t-full">
           <img
             src="https://images.unsplash.com/photo-1600619754865-8fe927da0701?q=80&w=3148&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="profile-picture"
-            className="w-64 h-full"
           />
         </CardHeader>
         <CardBody className="text-center">
@@ -144,12 +142,11 @@ export default function Mostvisited() {
         </CardFooter>
       </Card>
 
-      <Card className="w-64 h-full drop-shadow-xl">
-        <CardHeader className="h-80 mt-3 ">
+      <Card className="w-64 h-full rounded-t-full drop-shadow-xl">
+        <CardHeader className="h-80 rounded-t-full ">
           <img
             src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="profile-picture"
-            className="w-64 h-full"
           />
         </CardHeader>
         <CardBody className="text-center">
@@ -209,12 +206,11 @@ export default function Mostvisited() {
         </CardFooter>
       </Card>
 
-      <Card className="w-64 h-full">
-        <CardHeader className="h-80 mt-3">
+      <Card className="w-64 h-full rounded-t-full ">
+        <CardHeader className="h-80 rounded-t-full">
           <img
             src="https://voyagefox.net/wp-content/uploads/2022/07/calilo-sunrise-view.jpg"
             alt="profile-picture"
-            className="w-64 h-full"
           />
         </CardHeader>
         <CardBody className="text-center">

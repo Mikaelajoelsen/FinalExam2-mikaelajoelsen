@@ -2,7 +2,7 @@ const VenueReviews = () => {
   return (
     <div className="align-start">
       <div className="flex items-center mb-5">
-        <p className="bg-orange-100 text--800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800">
+        <p className="bg-stone-100 text--800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800">
           8.7
         </p>
         <p className="ms-2 font-medium text-gray-900 dark:text-white">

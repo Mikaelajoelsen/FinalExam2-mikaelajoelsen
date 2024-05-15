@@ -2,6 +2,8 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaUser } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+import { MdHotel } from "react-icons/md";
 import { Link } from "@tanstack/react-router";
 
 const navigation = [
@@ -100,9 +102,10 @@ export default function Navbar() {
                             href="/myvenues"
                             className={classNames(
                               active ? "bg-stone-100" : "",
-                              "block px-4 py-2 text-sm text-black"
+                              " flex flex-row gap-1 px-4 py-2 text-sm text-black"
                             )}
                           >
+                            <FaUser />
                             Your Profile
                           </a>
                         )}
@@ -110,12 +113,13 @@ export default function Navbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            to="/myvenue"
+                            to="/myvenues"
                             className={classNames(
                               active ? "bg-stone-100" : "",
-                              "block px-4 py-2 text-sm text-black"
+                              "flex flex-row gap-1 px-4 py-2 text-sm text-black"
                             )}
                           >
+                            <MdHotel />
                             Your Venues
                           </Link>
                         )}
@@ -127,9 +131,10 @@ export default function Navbar() {
                             onClick={logout}
                             className={classNames(
                               active ? "bg-stone-100" : "",
-                              "block px-4 py-2 text-sm text-black"
+                              "flex flex-row gap-1 px-4 py-2 text-sm text-black"
                             )}
                           >
+                            <CiLogout />
                             Sign out
                           </Link>
                         )}

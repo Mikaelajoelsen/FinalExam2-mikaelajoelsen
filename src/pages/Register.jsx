@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -8,6 +8,17 @@ function RegisterForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1530177150700-84cd9a3b059b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "";
+
+    return () => {
+      document.body.style.backgroundImage = "none";
+    };
+  }, []);
 
   const navigateToLogin = () => {
     setTimeout(() => {
@@ -61,9 +72,9 @@ function RegisterForm() {
 
   return (
     <>
-      <div className="flex-1 min-h-screen p-6 mt-6 mb-6 bg-white  sm:mx-auto sm:w-full sm:max-w-md bg-gradient-to-r from-pink-300 to-violet-200 rounded-lg ">
+      <div className="flex-1 min-h-screen p-6 mt-6 mb-6 bg-white  sm:mx-auto sm:w-full sm:max-w-md bg-gradient-to-r opacity-90 from-stone-50 to-stone-200 rounded-lg drop-shadow-xl">
         <div className="w-full max-w-sm mx-auto">
-          <h1 className="mt-6 text-4xl font-thin leading-7 text-center text-black">
+          <h1 className="mt-6 text-4xl font-bold leading-7 text-center text-black">
             Register
           </h1>
         </div>
@@ -157,7 +168,7 @@ function RegisterForm() {
               <div className="mt-6">
                 <button
                   type="submit"
-                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black rounded-full shadow-sm bg-pink-50/50 hover:bg-pink-200 focus:outline-none focus:ring focus:border-zinc-600"
+                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-white rounded-full shadow-sm bg-stone-500 hover:bg-stone-400 focus:outline-none focus:ring focus:border-zinc-600"
                 >
                   Register
                 </button>
@@ -175,7 +186,7 @@ function RegisterForm() {
               <div className="mt-2">
                 <Link
                   to="/login"
-                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black border border-black rounded-full shadow-sm hover:bg-pink-200 focus:outline-none focus:ring focus:border-zinc-600"
+                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black border border-black rounded-full shadow-sm hover:bg-stone-50 focus:outline-none focus:ring focus:border-zinc-600"
                 >
                   {isLoading ? "Registering" : "Login"}
                 </Link>

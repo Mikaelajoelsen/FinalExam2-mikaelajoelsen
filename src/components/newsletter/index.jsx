@@ -28,7 +28,7 @@ export default function Example() {
               />
               <button
                 type="submit"
-                className="flex-none rounded-md bg-orange-50 px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-orange-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                className="flex-none rounded-md bg-rose-50 px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-rose-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Subscribe
               </button>

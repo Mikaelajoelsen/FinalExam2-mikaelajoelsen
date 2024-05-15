@@ -71,6 +71,49 @@ const VenuePage = ({ onBook }) => {
     onBook: PropTypes.func.isRequired,
   };
 
+  const handleReserveClick = async () => {
+    try {
+      const requestBody = {
+        dateFrom: checkInDate,
+        dateTo: checkOutDate,
+        guests: totalGuests,
+        venueId: venue.id,
+      };
+
+      console.log("Reservation request body:", requestBody);
+
+      const results = await fetch(
+        `https://api.noroff.dev/api/v1/holidaze/bookings`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      const data = await results.json();
+
+      console.log("Reservation response:", data);
+
+      if (results.status !== 200) {
+        if (data.errors && data.errors.length > 0) {
+          throw new Error(data.errors[0].message);
+        } else {
+          throw new Error("An error occurred while making the reservation.");
+        }
+      }
+
+      if (onBook) {
+        onBook(data);
+      }
+    } catch (error) {
+      console.error("Error making reservation:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchVenue = async () => {
       try {
@@ -100,7 +143,7 @@ const VenuePage = ({ onBook }) => {
     };
 
     fetchVenue();
-  }, []);
+  }, [accessToken]);
 
   useEffect(() => {
     const handleTotalPrice = () => {
@@ -115,13 +158,6 @@ const VenuePage = ({ onBook }) => {
 
     handleTotalPrice();
   }, [checkInDate, checkOutDate, totalGuests, venue.price]);
-
-  const handleReserveClick = () => {
-    console.log("Reservation clicked!");
-    if (onBook) {
-      onBook(venue);
-    }
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -139,7 +175,7 @@ const VenuePage = ({ onBook }) => {
             alt=""
           />
         )}
-        <div className="flex items-center gap-2 font-bold text-pink-900 mb-5">
+        <div className="flex items-center gap-2 font-bold text-pink-600 mb-5">
           {rated}.5
           <Rating value={4} onChange={(value) => setRated(value)} />
         </div>
@@ -227,7 +263,7 @@ const VenuePage = ({ onBook }) => {
                 Total Price: ${totalPrice}
               </p>
               <button
-                className="block w-full select-none rounded-lg bg-amber-50 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                className="block w-full select-none rounded-lg bg-stone-50 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button"
                 onClick={handleReserveClick}
                 disabled={!matchesGuests}

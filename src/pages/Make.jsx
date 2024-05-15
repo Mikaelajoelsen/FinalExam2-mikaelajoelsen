@@ -32,7 +32,7 @@ export default function CreateVenuePage() {
   const createVenue = async (event) => {
     event.preventDefault();
 
-    formData["maxPrice"] = parseInt(formData["maxPrice"]);
+    formData["price"] = parseInt(formData["price"]);
 
     const accessToken = localStorage.getItem("access_token");
 
@@ -337,22 +337,7 @@ export default function CreateVenuePage() {
                 onChange={handleInputChange}
               />
             </div>
-            <div>
-              <label
-                htmlFor="latitude"
-                className="block text-gray-700 font-semibold"
-              >
-                Latitude:
-              </label>
-              <input
-                type="number"
-                id="latitude"
-                name="location.lat"
-                className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
-                value={formData.location.lat ? "" : formData.location.lat}
-                onChange={handleInputChange}
-              />
-            </div>
+
             <div>
               <label
                 htmlFor="longitude"
