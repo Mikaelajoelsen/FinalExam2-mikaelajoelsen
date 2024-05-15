@@ -32,6 +32,21 @@ const initialVenueState = {
     lat: 0,
     lng: 0,
   },
+  owner: {
+    name: "string",
+    email: "user@example.com",
+    avatar: "https://url.com/image.jpg",
+  },
+  bookings: [
+    {
+      id: "string",
+      dateFrom: "string",
+      dateTo: "string",
+      guests: 0,
+      created: "string",
+      updated: "string",
+    },
+  ],
 };
 
 const VenuePage = ({ onBook }) => {
@@ -56,13 +71,56 @@ const VenuePage = ({ onBook }) => {
     onBook: PropTypes.func.isRequired,
   };
 
+  const handleReserveClick = async () => {
+    try {
+      const requestBody = {
+        dateFrom: checkInDate,
+        dateTo: checkOutDate,
+        guests: totalGuests,
+        venueId: venue.id,
+      };
+
+      console.log("Reservation request body:", requestBody);
+
+      const results = await fetch(
+        `https://api.noroff.dev/api/v1/holidaze/bookings`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      const data = await results.json();
+
+      console.log("Reservation response:", data);
+
+      if (results.status !== 200) {
+        if (data.errors && data.errors.length > 0) {
+          throw new Error(data.errors[0].message);
+        } else {
+          throw new Error("An error occurred while making the reservation.");
+        }
+      }
+
+      if (onBook) {
+        onBook(data);
+      }
+    } catch (error) {
+      console.error("Error making reservation:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchVenue = async () => {
       try {
         const pathSegments = window.location.pathname.split("/");
         const venueId = pathSegments[pathSegments.length - 1];
         const response = await fetch(
-          `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`, // Legg til et komma her
+          `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}?_owner=true&_bookings=true`,
           {
             method: "GET",
             headers: {
@@ -85,7 +143,7 @@ const VenuePage = ({ onBook }) => {
     };
 
     fetchVenue();
-  }, []);
+  }, [accessToken]);
 
   useEffect(() => {
     const handleTotalPrice = () => {
@@ -100,13 +158,6 @@ const VenuePage = ({ onBook }) => {
 
     handleTotalPrice();
   }, [checkInDate, checkOutDate, totalGuests, venue.price]);
-
-  const handleReserveClick = () => {
-    console.log("Reservation clicked!");
-    if (onBook) {
-      onBook(venue);
-    }
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -124,7 +175,7 @@ const VenuePage = ({ onBook }) => {
             alt=""
           />
         )}
-        <div className="flex items-center gap-2 font-bold text-pink-900 mb-5">
+        <div className="flex items-center gap-2 font-bold text-pink-600 mb-5">
           {rated}.5
           <Rating value={4} onChange={(value) => setRated(value)} />
         </div>
@@ -137,24 +188,22 @@ const VenuePage = ({ onBook }) => {
               <h1 className="text-3xl font-bold mb-2 mt-8 text-black">
                 {venue.name}
               </h1>
+              <p className="mb-2 text-black">Owner: {venue.owner.name}</p>
+              <p className="mb-2 text-black">Email: {venue.owner.email}</p>
               <p className="mb-2 text-black">Created: {venue.created}</p>
               <p className="mb-2 text-black">Updated: {venue.updated}</p>
               <p className="mb-2 text-black">Info: {venue.description}</p>
               <p className="mb-2 text-black">Rating: {venue.rating}</p>
-              <p className="mb-2 text-gray-500">
-                Price: ${venue.price} per night
-              </p>
-              <p className="mb-2 text-gray-500">
-                Max Guests: {venue.maxGuests}
-              </p>
+              <p className="mb-2 text-black">Price: ${venue.price} per night</p>
+              <p className="mb-2 text-black">Max Guests: {venue.maxGuests}</p>
               {venue.location && (
-                <p className="mb-2 text-gray-500">
+                <p className="mb-2 text-black">
                   Address: {venue.location.address}, {venue.location.city},{" "}
                   {venue.location.country}
                 </p>
               )}
               {venue.meta && (
-                <p className="mb-2 text-gray-500">
+                <p className="mb-2 text-black">
                   Facilities:
                   {venue.meta.id ? ` ${venue.meta.id},` : ""}
                   {venue.meta.breakfast ? " Breakfast," : ""}
@@ -163,10 +212,23 @@ const VenuePage = ({ onBook }) => {
                   {venue.meta.wifi ? " Wifi" : ""}
                 </p>
               )}
+              {venue.bookings &&
+                venue.bookings.map((booking, index) => (
+                  <div key={index} className="mb-2 text-black">
+                    <p>Booking {index + 1}:</p>
+                    <p>ID: {booking.id}</p>
+                    <p>Date From: {booking.dateFrom}</p>
+                    <p>Date To: {booking.dateTo}</p>
+                    <p>Guests: {booking.guests}</p>
+                    <p>Created: {booking.created}</p>
+                    <p>Updated: {booking.updated}</p>
+                  </div>
+                ))}
             </div>
           )}
+
           <div className="md:w-1/2">
-            <div className="rounded-xl bg-white text-gray-700 shadow-lg p-6">
+            <div className="rounded-xl bg-white text-black shadow-lg p-6">
               <div className="flex flex-col justify-center ">
                 <DatePicker
                   selected={checkInDate}
@@ -201,7 +263,7 @@ const VenuePage = ({ onBook }) => {
                 Total Price: ${totalPrice}
               </p>
               <button
-                className="block w-full select-none rounded-lg bg-amber-50 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                className="block w-full select-none rounded-lg bg-stone-50 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button"
                 onClick={handleReserveClick}
                 disabled={!matchesGuests}
@@ -225,7 +287,6 @@ const VenuePage = ({ onBook }) => {
 const App = () => {
   const handleBook = (venue) => {
     console.log("Booking:", venue);
-    // Implement booking logic here
   };
 
   return (

@@ -10,6 +10,16 @@ const ProfilePage = () => {
   const [isAvatarUpdated, setIsAvatarUpdated] = useState(false);
 
   useEffect(() => {
+    document.body.style.backgroundImage = `url("https://wallpapers.com/images/hd/black-and-white-palm-tree-yzzqr0px3rfh9zwm.jpg")`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center";
+    return () => {
+      document.body.style.backgroundImage = "none";
+    };
+  }, []);
+
+  useEffect(() => {
     const fetchUserProfile = async () => {
       try {
         const userName = localStorage.getItem("name");
@@ -34,7 +44,7 @@ const ProfilePage = () => {
         setProfileData(responseData);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching user profile:", error);
+        console.error("Login To Your Profile", error);
         setError(error.message);
         setLoading(false);
       }
