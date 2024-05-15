@@ -354,11 +354,27 @@ export default function CreateVenuePage() {
                 onChange={handleInputChange}
               />
             </div>
+            <div>
+              <label
+                htmlFor="latitude"
+                className="block text-gray-700 font-semibold"
+              >
+                Latitude:
+              </label>
+              <input
+                type="number"
+                id="latitude"
+                name="location.lat"
+                className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-black"
+                value={formData.location.lat}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
           <div className="flex justify-center mt-4">
             <button
               type="submit"
-              className="px-6 py-2 bg-purple-50 font-thin text-black rounded-full hover:bg-gradient-to-br from-purple-50 via-purple-100 to-purple-200 hover:text-xl focus:outline-none focus:ring focus:border-pink-300"
+              className="px-6 py-2  bg-stone-50 border border-black font-thin text-black rounded-full hover:bg-gradient-to-br from-stone-200 via-stone-100 to-stone-50  focus:outline-none focus:ring focus:border-pink-300"
             >
               Create Venue
             </button>
