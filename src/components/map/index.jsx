@@ -27,8 +27,12 @@ class GoogleMap extends React.Component {
 
     return (
       <div className="relative h-96 w-full">
-        <APIProvider apiKey={"AIzaSyAY2tyOgEyJT3uZ2N259RzwG2iZHx0p9tU"}>
-          <Map center={position} zoom={15}>
+        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+          <Map
+            defaultCenter={position}
+            defaultZoom={15}
+            mapId={import.meta.env.VITE_MAP_ID}
+          >
             <Marker position={position} />
           </Map>
         </APIProvider>

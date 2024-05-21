@@ -7,9 +7,9 @@ export default function CreateVenuePage() {
     name: "",
     description: "",
     media: ["https:///..."],
-    price: 0,
-    maxGuests: 0,
-    rating: 0,
+    price: "",
+    maxGuests: "",
+    rating: "",
     meta: {
       wifi: false,
       parking: false,
@@ -22,8 +22,8 @@ export default function CreateVenuePage() {
       zip: "",
       country: "",
       continent: "",
-      lat: 0,
-      lng: 0,
+      lat: "",
+      lng: "",
     },
   });
 
@@ -32,9 +32,21 @@ export default function CreateVenuePage() {
   const createVenue = async (event) => {
     event.preventDefault();
 
-    formData["price"] = parseInt(formData["price"]);
-
     const accessToken = localStorage.getItem("access_token");
+
+    const submissionData = {
+      ...formData,
+      price: parseFloat(formData.price),
+      maxGuests: parseInt(formData.maxGuests),
+      rating: parseFloat(formData.rating),
+      location: {
+        ...formData.location,
+        lat: parseFloat(formData.location.lat),
+        lng: parseFloat(formData.location.lng),
+      },
+    };
+
+    console.log("Submitting formData:", submissionData);
 
     try {
       const response = await fetch(
@@ -45,7 +57,7 @@ export default function CreateVenuePage() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(submissionData),
         }
       );
 
@@ -55,6 +67,7 @@ export default function CreateVenuePage() {
         console.log("Created Venue:", responseData);
         navigate("/myvenues");
       } else {
+        console.log(responseData);
         console.error(
           "Error:",
           responseData.message || "An unknown error occurred."
@@ -86,11 +99,9 @@ export default function CreateVenuePage() {
         },
       }));
     } else {
-      const parsedValue = type === "number" ? parseFloat(value) : value;
-
       setFormData((prevFormData) => ({
         ...prevFormData,
-        [name]: parsedValue,
+        [name]: value,
       }));
     }
   };
@@ -98,16 +109,18 @@ export default function CreateVenuePage() {
   const previewImage = (event) => {
     const imageUrl = event.target.value;
     setImagePreviewUrl(imageUrl);
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       media: [imageUrl],
-    });
+    }));
   };
 
   return (
-    <div className=" max-w-6xl mx-auto p-1 relative rounded-md mt-5">
-      <div className="p-8 bg-white rounded-md">
-        <h1 className="text-5xl font-thin text-start mb-4">Create a Venue</h1>
+    <div className="max-w-4xl mx-auto p-1 relative rounded-md mt-5 bg-slate-100 drop-shadow-xl">
+      <div className="p-8 bg-stone-100 rounded-md">
+        <h1 className="flex justify-center text-5xl font-thin text-start mb-4">
+          Create a Venue
+        </h1>
         <form onSubmit={createVenue} className="grid gap-4">
           <div>
             <label htmlFor="name" className="block text-gray-700 font-semibold">
@@ -166,7 +179,7 @@ export default function CreateVenuePage() {
               htmlFor="price"
               className="block text-gray-700 font-semibold"
             >
-              Price:
+              Price (NOK):
             </label>
             <input
               type="number"
@@ -175,6 +188,7 @@ export default function CreateVenuePage() {
               className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
               value={formData.price}
               onChange={handleInputChange}
+              onFocus={(e) => e.target.select()}
               required
             />
           </div>
@@ -192,6 +206,7 @@ export default function CreateVenuePage() {
               className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
               value={formData.maxGuests}
               onChange={handleInputChange}
+              onFocus={(e) => e.target.select()}
               required
             />
           </div>
@@ -209,6 +224,7 @@ export default function CreateVenuePage() {
               className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-pink-500"
               value={formData.rating}
               onChange={handleInputChange}
+              onFocus={(e) => e.target.select()}
             />
           </div>
           <div>
@@ -337,7 +353,6 @@ export default function CreateVenuePage() {
                 onChange={handleInputChange}
               />
             </div>
-
             <div>
               <label
                 htmlFor="longitude"
@@ -374,7 +389,7 @@ export default function CreateVenuePage() {
           <div className="flex justify-center mt-4">
             <button
               type="submit"
-              className="px-6 py-2  bg-stone-50 border border-black font-thin text-black rounded-full hover:bg-gradient-to-br from-stone-200 via-stone-100 to-stone-50  focus:outline-none focus:ring focus:border-pink-300"
+              className="px-6 py-2 bg-stone-100 border font-thin text-black rounded-full hover:bg-green-500 focus:outline-none focus:ring focus:border-pink-300"
             >
               Create Venue
             </button>

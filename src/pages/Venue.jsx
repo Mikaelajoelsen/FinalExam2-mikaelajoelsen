@@ -33,20 +33,11 @@ const initialVenueState = {
     lng: 0,
   },
   owner: {
-    name: "string",
-    email: "user@example.com",
-    avatar: "https://url.com/image.jpg",
+    name: "",
+    email: "",
+    avatar: "",
   },
-  bookings: [
-    {
-      id: "string",
-      dateFrom: "string",
-      dateTo: "string",
-      guests: 0,
-      created: "string",
-      updated: "string",
-    },
-  ],
+  bookings: [],
 };
 
 const VenuePage = ({ onBook }) => {
@@ -58,61 +49,6 @@ const VenuePage = ({ onBook }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [rated, setRated] = useState(0);
   const accessToken = localStorage.getItem("access_token");
-
-  const handleCheckInDateChange = (date) => {
-    setCheckInDate(date);
-  };
-
-  const handleCheckOutDateChange = (date) => {
-    setCheckOutDate(date);
-  };
-
-  VenuePage.propTypes = {
-    onBook: PropTypes.func.isRequired,
-  };
-
-  const handleReserveClick = async () => {
-    try {
-      const requestBody = {
-        dateFrom: checkInDate,
-        dateTo: checkOutDate,
-        guests: totalGuests,
-        venueId: venue.id,
-      };
-
-      console.log("Reservation request body:", requestBody);
-
-      const results = await fetch(
-        `https://api.noroff.dev/api/v1/holidaze/bookings`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-        }
-      );
-
-      const data = await results.json();
-
-      console.log("Reservation response:", data);
-
-      if (results.status !== 200) {
-        if (data.errors && data.errors.length > 0) {
-          throw new Error(data.errors[0].message);
-        } else {
-          throw new Error("An error occurred while making the reservation.");
-        }
-      }
-
-      if (onBook) {
-        onBook(data);
-      }
-    } catch (error) {
-      console.error("Error making reservation:", error);
-    }
-  };
 
   useEffect(() => {
     const fetchVenue = async () => {
@@ -146,7 +82,7 @@ const VenuePage = ({ onBook }) => {
   }, [accessToken]);
 
   useEffect(() => {
-    const handleTotalPrice = () => {
+    const calculateTotalPrice = () => {
       if (checkInDate && checkOutDate) {
         const nights = Math.ceil(
           (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)
@@ -156,8 +92,54 @@ const VenuePage = ({ onBook }) => {
       }
     };
 
-    handleTotalPrice();
+    calculateTotalPrice();
   }, [checkInDate, checkOutDate, totalGuests, venue.price]);
+
+  const handleReserveClick = async () => {
+    try {
+      const requestBody = {
+        dateFrom: checkInDate,
+        dateTo: checkOutDate,
+        guests: totalGuests,
+        venueId: venue.id,
+      };
+
+      const response = await fetch(
+        `https://api.noroff.dev/api/v1/holidaze/bookings`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.status !== 201) {
+        if (data.errors && data.errors.length > 0) {
+          throw new Error(data.errors[0].message);
+        } else {
+          throw new Error("An error occurred while making the reservation.");
+        }
+      }
+
+      const existingBookings =
+        JSON.parse(localStorage.getItem("bookings")) || [];
+      localStorage.setItem(
+        "bookings",
+        JSON.stringify([...existingBookings, data])
+      );
+
+      if (onBook) {
+        onBook(data);
+      }
+    } catch (error) {
+      console.error("Error making reservation:", error);
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -171,8 +153,8 @@ const VenuePage = ({ onBook }) => {
         {venue && (
           <img
             className="object-cover w-full h-96 mb-4"
-            src={venue?.media?.[0]}
-            alt=""
+            src={venue.media[0]}
+            alt={venue.name}
           />
         )}
         <div className="flex items-center gap-2 font-bold text-pink-600 mb-5">
@@ -183,62 +165,59 @@ const VenuePage = ({ onBook }) => {
           Based on 202 Reviews
         </Typography>
         <div className="flex flex-col md:flex-row justify-between">
-          {venue && (
-            <div className="md:w-1/2 md:pr-4">
-              <h1 className="text-3xl font-bold mb-2 mt-8 text-black">
-                {venue.name}
-              </h1>
-              <p className="mb-2 text-black">Owner: {venue.owner.name}</p>
-              <p className="mb-2 text-black">Email: {venue.owner.email}</p>
-              <p className="mb-2 text-black">Created: {venue.created}</p>
-              <p className="mb-2 text-black">Updated: {venue.updated}</p>
-              <p className="mb-2 text-black">Info: {venue.description}</p>
-              <p className="mb-2 text-black">Rating: {venue.rating}</p>
-              <p className="mb-2 text-black">Price: ${venue.price} per night</p>
-              <p className="mb-2 text-black">Max Guests: {venue.maxGuests}</p>
-              {venue.location && (
-                <p className="mb-2 text-black">
-                  Address: {venue.location.address}, {venue.location.city},{" "}
-                  {venue.location.country}
-                </p>
-              )}
-              {venue.meta && (
-                <p className="mb-2 text-black">
-                  Facilities:
-                  {venue.meta.id ? ` ${venue.meta.id},` : ""}
-                  {venue.meta.breakfast ? " Breakfast," : ""}
-                  {venue.meta.parking ? " Parking," : ""}
-                  {venue.meta.pets ? " Pets," : ""}
-                  {venue.meta.wifi ? " Wifi" : ""}
-                </p>
-              )}
-              {venue.bookings &&
-                venue.bookings.map((booking, index) => (
-                  <div key={index} className="mb-2 text-black">
-                    <p>Booking {index + 1}:</p>
-                    <p>ID: {booking.id}</p>
-                    <p>Date From: {booking.dateFrom}</p>
-                    <p>Date To: {booking.dateTo}</p>
-                    <p>Guests: {booking.guests}</p>
-                    <p>Created: {booking.created}</p>
-                    <p>Updated: {booking.updated}</p>
-                  </div>
-                ))}
-            </div>
-          )}
+          <div className="md:w-1/2 md:pr-4">
+            <h1 className="text-3xl font-bold mb-2 mt-8 text-black">
+              {venue.name}
+            </h1>
+            <p className="mb-2 text-black">Owner: {venue.owner.name}</p>
+            <p className="mb-2 text-black">Email: {venue.owner.email}</p>
+            <p className="mb-2 text-black">Created: {venue.created}</p>
+            <p className="mb-2 text-black">Updated: {venue.updated}</p>
+            <p className="mb-2 text-black">Info: {venue.description}</p>
+            <p className="mb-2 text-black">Rating: {venue.rating}</p>
+            <p className="mb-2 text-black">Price: ${venue.price} per night</p>
+            <p className="mb-2 text-black">Max Guests: {venue.maxGuests}</p>
+            {venue.location && (
+              <p className="mb-2 text-black">
+                Address: {venue.location.address}, {venue.location.city},{" "}
+                {venue.location.country}
+              </p>
+            )}
+            {venue.meta && (
+              <p className="mb-2 text-black">
+                Facilities:
+                {venue.meta.breakfast ? " Breakfast," : ""}
+                {venue.meta.parking ? " Parking," : ""}
+                {venue.meta.pets ? " Pets," : ""}
+                {venue.meta.wifi ? " Wifi" : ""}
+              </p>
+            )}
+            {venue.bookings &&
+              venue.bookings.map((booking, index) => (
+                <div key={index} className="mb-2 text-black">
+                  <p>Booking {index + 1}:</p>
+                  <p>ID: {booking.id}</p>
+                  <p>Date From: {booking.dateFrom}</p>
+                  <p>Date To: {booking.dateTo}</p>
+                  <p>Guests: {booking.guests}</p>
+                  <p>Created: {booking.created}</p>
+                  <p>Updated: {booking.updated}</p>
+                </div>
+              ))}
+          </div>
 
           <div className="md:w-1/2">
             <div className="rounded-xl bg-white text-black shadow-lg p-6">
               <div className="flex flex-col justify-center ">
                 <DatePicker
                   selected={checkInDate}
-                  onChange={handleCheckInDateChange}
+                  onChange={(date) => setCheckInDate(date)}
                   placeholderText="SELECT CHECKIN"
                   className=" w-full py-2 px-4 mb-4 border rounded-md"
                 />
                 <DatePicker
                   selected={checkOutDate}
-                  onChange={handleCheckOutDateChange}
+                  onChange={(date) => setCheckOutDate(date)}
                   placeholderText="SELECT CHECKOUT"
                   className="w-full py-2 px-4 mb-4 border rounded-md"
                 />
@@ -263,7 +242,7 @@ const VenuePage = ({ onBook }) => {
                 Total Price: ${totalPrice}
               </p>
               <button
-                className="block w-full select-none rounded-lg bg-stone-50 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                className="block w-full select-none rounded-lg bg-stone-50 py-3.5 px-7 text-center align-middle font-sans text-sm font-thin uppercase text-pink-800 shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button"
                 onClick={handleReserveClick}
                 disabled={!matchesGuests}
@@ -284,9 +263,13 @@ const VenuePage = ({ onBook }) => {
   );
 };
 
+VenuePage.propTypes = {
+  onBook: PropTypes.func.isRequired,
+};
+
 const App = () => {
-  const handleBook = (venue) => {
-    console.log("Booking:", venue);
+  const handleBook = (booking) => {
+    console.log("Booking:", booking);
   };
 
   return (
