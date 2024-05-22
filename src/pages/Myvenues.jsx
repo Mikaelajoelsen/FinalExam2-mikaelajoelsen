@@ -150,7 +150,9 @@ const MyVenuesPage = () => {
       </div>
       <h3 className="flex justify-center py-2 text-3xl font-thin">BOOKINGS</h3>
       <Booking />
-      <h3 className="flex justify-center py-2 text-3xl font-thin">VENUES</h3>
+      <h3 className="flex justify-center py-2 text-3xl font-thin">
+        YOUR VENUES
+      </h3>
       <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 mb-10 m-5">
         {venues && venues.length > 0 ? (
           venues.map((venue) => (
@@ -207,7 +209,7 @@ const MyVenuesPage = () => {
       </div>
 
       {isEditing && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
+        <div className="fixed inset-0  flex items-center justify-center bg-gray-500 bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-thin mb-4">Edit Venue</h2>
             <form onSubmit={handleUpdateVenue}>

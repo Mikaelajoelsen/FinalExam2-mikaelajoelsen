@@ -4,8 +4,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Typography } from "@material-tailwind/react";
 import { Rating } from "@material-tailwind/react";
-import Review from "../components/review";
 import PropTypes from "prop-types";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaWifi, FaParking, FaCoffee, FaDog } from "react-icons/fa";
 
 const initialVenueState = {
   id: "",
@@ -48,6 +49,11 @@ const VenuePage = ({ onBook }) => {
   const [totalGuests, setTotalGuests] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [rated, setRated] = useState(0);
+  const [reviews, setReviews] = useState([]);
+  const [reviewText, setReviewText] = useState("");
+  const [reviewRating, setReviewRating] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showAllBookings, setShowAllBookings] = useState(false);
   const accessToken = localStorage.getItem("access_token");
 
   useEffect(() => {
@@ -141,25 +147,76 @@ const VenuePage = ({ onBook }) => {
     }
   };
 
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === venue.media.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? venue.media.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleToggleBookings = () => {
+    setShowAllBookings((prevState) => !prevState);
+  };
+
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+    if (reviewText && reviewRating) {
+      const newReview = {
+        text: reviewText,
+        rating: reviewRating,
+        date: new Date().toISOString(),
+        likes: 0,
+      };
+      setReviews((prevReviews) => [newReview, ...prevReviews]);
+      setReviewText("");
+      setReviewRating(0);
+    } else {
+      console.error("Review text or rating is missing");
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   const matchesGuests = venue.maxGuests >= totalGuests;
 
+  const bookingsToShow = showAllBookings
+    ? venue.bookings
+    : venue.bookings.slice(0, 1);
+
   return (
-    <div className="flex flex-col items-center gap-6 ">
+    <div className="flex flex-col items-center gap-6">
       <div className="w-full max-w-4xl rounded-xl text-gray-700 p-6">
-        {venue && (
-          <img
-            className="object-cover w-full h-96 mb-4"
-            src={venue.media[0]}
-            alt={venue.name}
-          />
+        {venue.media.length > 0 && (
+          <div className="relative mb-4">
+            <img
+              className="object-cover w-full h-96 rounded-lg"
+              src={venue.media[currentImageIndex]}
+              alt={`${venue.name} image ${currentImageIndex + 1}`}
+            />
+            <button
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-full"
+              onClick={handlePrevImage}
+            >
+              <FaArrowLeft size={24} />
+            </button>
+            <button
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-full"
+              onClick={handleNextImage}
+            >
+              <FaArrowRight size={24} />
+            </button>
+          </div>
         )}
         <div className="flex items-center gap-2 font-bold text-pink-600 mb-5">
           {rated}.5
-          <Rating value={4} onChange={(value) => setRated(value)} />
+          <Rating value={rated} onChange={(value) => setRated(value)} />
         </div>
         <Typography color="blue-gray" className="font-medium text-black">
           Based on 202 Reviews
@@ -175,7 +232,7 @@ const VenuePage = ({ onBook }) => {
             <p className="mb-2 text-black">Updated: {venue.updated}</p>
             <p className="mb-2 text-black">Info: {venue.description}</p>
             <p className="mb-2 text-black">Rating: {venue.rating}</p>
-            <p className="mb-2 text-black">Price: ${venue.price} per night</p>
+            <p className="mb-2 text-black">Price: {venue.price}kr per night</p>
             <p className="mb-2 text-black">Max Guests: {venue.maxGuests}</p>
             {venue.location && (
               <p className="mb-2 text-black">
@@ -184,36 +241,58 @@ const VenuePage = ({ onBook }) => {
               </p>
             )}
             {venue.meta && (
-              <p className="mb-2 text-black">
-                Facilities:
-                {venue.meta.breakfast ? " Breakfast," : ""}
-                {venue.meta.parking ? " Parking," : ""}
-                {venue.meta.pets ? " Pets," : ""}
-                {venue.meta.wifi ? " Wifi" : ""}
-              </p>
+              <div className="mb-2 text-black flex flex-wrap space-x-5">
+                {venue.meta.wifi && (
+                  <div className="flex items-center">
+                    <FaWifi className="mr-1" /> Wifi
+                  </div>
+                )}
+                {venue.meta.parking && (
+                  <div className="flex items-center">
+                    <FaParking className="mr-1" /> Parking
+                  </div>
+                )}
+                {venue.meta.breakfast && (
+                  <div className="flex items-center">
+                    <FaCoffee className="mr-1" /> Breakfast
+                  </div>
+                )}
+                {venue.meta.pets && (
+                  <div className="flex items-center">
+                    <FaDog className="mr-1" /> Pets Allowed
+                  </div>
+                )}
+              </div>
             )}
-            {venue.bookings &&
-              venue.bookings.map((booking, index) => (
-                <div key={index} className="mb-2 text-black">
-                  <p>Booking {index + 1}:</p>
-                  <p>ID: {booking.id}</p>
-                  <p>Date From: {booking.dateFrom}</p>
-                  <p>Date To: {booking.dateTo}</p>
-                  <p>Guests: {booking.guests}</p>
-                  <p>Created: {booking.created}</p>
-                  <p>Updated: {booking.updated}</p>
-                </div>
-              ))}
+            {bookingsToShow.map((booking, index) => (
+              <div key={index} className="mb-2 text-black">
+                <p>Booking {index + 1}:</p>
+                <p>ID: {booking.id}</p>
+                <p>Date From: {booking.dateFrom}</p>
+                <p>Date To: {booking.dateTo}</p>
+                <p>Guests: {booking.guests}</p>
+                <p>Created: {booking.created}</p>
+                <p>Updated: {booking.updated}</p>
+              </div>
+            ))}
+            {venue.bookings.length > 1 && (
+              <button
+                onClick={handleToggleBookings}
+                className="px-4 py-2 mt-4 bg-stone-100 hover:bg-stone-200 text-black rounded-md"
+              >
+                {showAllBookings ? "View Less" : "View More"}
+              </button>
+            )}
           </div>
 
           <div className="md:w-1/2">
             <div className="rounded-xl bg-white text-black shadow-lg p-6">
-              <div className="flex flex-col justify-center ">
+              <div className="flex flex-col justify-center">
                 <DatePicker
                   selected={checkInDate}
                   onChange={(date) => setCheckInDate(date)}
                   placeholderText="SELECT CHECKIN"
-                  className=" w-full py-2 px-4 mb-4 border rounded-md"
+                  className="w-full py-2 px-4 mb-4 border rounded-md"
                 />
                 <DatePicker
                   selected={checkOutDate}
@@ -236,10 +315,10 @@ const VenuePage = ({ onBook }) => {
                 </select>
               </div>
               <p className="text-center text-2xl font-semibold mb-4 mt-6">
-                Price: ${venue.price} per night
+                Price: {venue.price}kr per night
               </p>
               <p className="text-center text-2xl font-semibold mb-4">
-                Total Price: ${totalPrice}
+                Total Price: {totalPrice}kr
               </p>
               <button
                 className="block w-full select-none rounded-lg bg-stone-50 py-3.5 px-7 text-center align-middle font-sans text-sm font-thin uppercase text-pink-800 shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -252,8 +331,48 @@ const VenuePage = ({ onBook }) => {
             </div>
           </div>
         </div>
+
         <div className="mt-10">
-          <Review />
+          <h2 className="text-2xl font-thin mb-4 mt-2">Reviews</h2>
+          <form onSubmit={handleReviewSubmit} className="mb-6">
+            <div className="mb-4">
+              <textarea
+                className="w-full p-4 border rounded-md"
+                rows="4"
+                placeholder="Write your review..."
+                value={reviewText}
+                onChange={(e) => setReviewText(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="mb-4 flex items-center">
+              <span className="mr-2 text-lg">Rating:</span>
+              <Rating
+                value={reviewRating}
+                onChange={(value) => setReviewRating(value)}
+              />
+            </div>
+            <button
+              type="submit"
+              className="px-4 py-2 bg-pink-600 text-white rounded-md"
+            >
+              Submit Review
+            </button>
+          </form>
+          <div>
+            {reviews.map((review, index) => (
+              <div key={index} className="mb-4 p-4 border rounded-md">
+                <div className="flex flex-wrap items-center mb-2">
+                  <Rating value={review.rating} readOnly />
+                  <span className="ml-2 text-gray-600">
+                    {new Date(review.date).toLocaleDateString()}
+                  </span>
+                </div>
+                <p>{review.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="w-full">

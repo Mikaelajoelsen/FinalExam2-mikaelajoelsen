@@ -42,6 +42,12 @@ const ProfilePage = () => {
         console.log("Response data:", responseData);
 
         setProfileData(responseData);
+        const savedAvatar = localStorage.getItem("avatar");
+        if (savedAvatar) {
+          setAvatar(savedAvatar);
+        } else {
+          setAvatar(responseData.avatar);
+        }
         setLoading(false);
       } catch (error) {
         console.error("Login To Your Profile", error);
@@ -78,6 +84,7 @@ const ProfilePage = () => {
 
     if (newAvatar) {
       setAvatar(newAvatar);
+      localStorage.setItem("avatar", newAvatar);
       setIsAvatarUpdated(true);
     }
     setNewAvatar(null);
@@ -127,7 +134,7 @@ const ProfilePage = () => {
               />
               <button
                 type="submit"
-                className="px-4 py-2 ml-1 text-black bg-pink-100 rounded-full"
+                className="px-4 py-2 ml-1 text-black bg-pink-50 rounded-full"
               >
                 Update
               </button>
