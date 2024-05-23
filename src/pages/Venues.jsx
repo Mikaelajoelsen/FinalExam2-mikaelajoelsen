@@ -15,6 +15,7 @@ const Venues = () => {
   const [checking, setChecking] = useState(null);
   const [checkout, setCheckout] = useState(null);
   const [totalGuests, setTotalGuests] = useState(1);
+  const [likedVenues, setLikedVenues] = useState([]);
 
   useEffect(() => {
     const fetchVenues = async () => {
@@ -46,24 +47,18 @@ const Venues = () => {
     setVisibleVenues(filteredVenues.slice(0, visibleCount));
   }, [filteredVenues, visibleCount]);
 
-  const handleSearchChange = () => {
-    const filtered = venues.filter((venue) => {
-      const matchesChecking =
-        !checking || (venue.checking && venue.checking.includes(checking));
-      const matchesCheckout =
-        !checkout || (venue.checkout && venue.checkout.includes(checkout));
-      const matchesGuests = venue.adults + venue.kids <= totalGuests;
-      const matchesName = venue.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      return matchesChecking && matchesCheckout && matchesGuests && matchesName;
-    });
-
-    setFilteredVenues(filtered);
-  };
-
   const handleViewMore = () => {
     setVisibleCount((prevCount) => prevCount + 12);
+  };
+
+  const handleLikeVenue = (id) => {
+    setLikedVenues((prevLikedVenues) => {
+      if (prevLikedVenues.includes(id)) {
+        return prevLikedVenues.filter((venueId) => venueId !== id);
+      } else {
+        return [...prevLikedVenues, id];
+      }
+    });
   };
 
   return (
@@ -108,16 +103,18 @@ const Venues = () => {
             ))}
           </select>
         </div>
-        <button
-          className="flex text-xl font-bold bg-white text-black"
-          onClick={handleSearchChange}
-        ></button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {visibleVenues.map((venue) => (
-          <Link key={venue.id} to={`/venue/${venue.id}`}>
-            <div className="relative bg-white rounded-lg shadow-md overflow-hidden">
-              <FaHeart className="absolute top-2 right-2 text-inherit opacity-25 cursor-pointer" />
+          <div
+            key={venue.id}
+            className="relative bg-white rounded-lg shadow-md overflow-hidden"
+          >
+            <FaHeart
+              className={`absolute top-2 right-2 cursor-pointer ${likedVenues.includes(venue.id) ? "text-red-500" : "text-gray-400"}`}
+              onClick={() => handleLikeVenue(venue.id)}
+            />
+            <Link to={`/venue/${venue.id}`}>
               <div className="h-48 overflow-hidden">
                 <img
                   src={venue.media[0]}
@@ -125,16 +122,18 @@ const Venues = () => {
                   className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="p-4">
-                <h2 className="text-l font-semibold mb-2">{venue.name}</h2>
-                <div className="flex justify-between items-center">
-                  <p className="text-black">Price: {venue.price}</p>
+              <div className=" p-4">
+                <h2 className="flex justify-center text-l font-semibold mb-2">
+                  {venue.name}
+                </h2>
+                <div className="flex flex-col justify-between items-center">
+                  <p className="text-black">Price: {venue.price}kr</p>
                   <p className="text-black">Rating: {venue.rating}</p>
                   <p className="text-black">Location: {venue.location.city}</p>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))}
       </div>
       {visibleVenues.length < filteredVenues.length && (

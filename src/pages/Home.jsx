@@ -3,6 +3,7 @@ import Mostvisited from "../components/Mostvisited";
 import "@fontsource/la-belle-aurore";
 import Tips from "../components/tips";
 import Newsletter from "../components/newsletter";
+import { Link } from "@tanstack/react-router";
 
 export default function Homepage() {
   return (
@@ -24,18 +25,18 @@ export default function Homepage() {
             </p>
 
             <div className="flex flex-wrap md:flex-row justify-center md:space-x-8">
-              <button
+              <Link
                 to="/venues"
-                className="  font-thin rounded-full text-black bg-white  px-4 py-2 shadow-lg hover:opacity-90 inset-0 hover:bg-gradient-to-br from-orange-100 via-orange-50 to-yellow-50 mb-4 md:mb-0 w-full md:w-auto shadow-black"
+                className="  font-thin rounded-full text-black bg-white  px-4 py-2 shadow-lg hover:opacity-90 inset-0 hover:bg-gradient-to-br from-stone-100 via-stone-50 to-stone-50 mb-4 md:mb-0 w-full md:w-auto shadow-black"
               >
                 View Our Locations
-              </button>
-              <button
+              </Link>
+              <Link
                 to="/myvenues"
-                className="font-thin text-black rounded-full bg-white px-4 py-2 shadow-md hover:opacity-90 inset-0 hover:bg-gradient-to-br from-orange-100 via-orange-50 to-yellow-50 w-full md:w-auto shadow-black"
+                className="font-thin text-black rounded-full bg-white px-4 py-2 shadow-md hover:opacity-90 inset-0 hover:bg-gradient-to-br from-stone-100 via-stone-50 to-stone-50 w-full md:w-auto shadow-black"
               >
                 Go to your bookings
-              </button>
+              </Link>
             </div>
           </div>
         </div>
