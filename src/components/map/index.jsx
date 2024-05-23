@@ -1,13 +1,6 @@
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import PropTypes from "prop-types";
 import React from "react";
-/* 
-  Making react component, extending this class
-   in order to have property validation (with PropTypes)
-    and not getting es linting error
- see GoogleMap.defaultProps
-
-*/
 class GoogleMap extends React.Component {
   render() {
     let { lat, lng } = this.props;

@@ -7,7 +7,7 @@ export default function CreateVenuePage() {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    media: ["https:///..."],
+    media: [],
     price: "",
     maxGuests: "",
     rating: "",
@@ -27,8 +27,8 @@ export default function CreateVenuePage() {
       lng: "",
     },
   });
-
-  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
+  const [successMessage, setSuccessMessage] = useState(""); // State to manage success message
 
   const createVenue = async (event) => {
     event.preventDefault();
@@ -68,6 +68,7 @@ export default function CreateVenuePage() {
 
       if (response.ok) {
         console.log("Created Venue:", responseData);
+        setSuccessMessage("Venue created successfully!"); // Set success message
         navigate("/myvenues");
       } else {
         console.log(responseData);
@@ -111,7 +112,7 @@ export default function CreateVenuePage() {
 
   const previewImage = (event) => {
     const imageUrl = event.target.value;
-    setImagePreviewUrl(imageUrl);
+    setImagePreviewUrls([imageUrl]);
     setFormData((prevFormData) => ({
       ...prevFormData,
       media: [imageUrl],
@@ -122,11 +123,20 @@ export default function CreateVenuePage() {
   const prevStep = () => setStep((prevStep) => prevStep - 1);
 
   return (
-    <div className="max-w-3xl mx-auto p-1 relative rounded-md mt-5 bg-stone-50 drop-shadow-xl">
+    <div className="max-w-3xl mx-auto p-1 relative rounded-md mt-5 bg-stone-50">
       <div className="p-8 bg-stone-50 rounded-md drop-shadow-xl">
         <h1 className="flex justify-center text-4xl font-semibold text-gray-800 mb-4">
           Create a Venue
         </h1>
+        {successMessage && (
+          <div
+            className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
+            <strong className="font-bold">Success!</strong>
+            <span className="block sm:inline"> {successMessage}</span>
+          </div>
+        )}
         <div className="mb-6">
           <div className="relative pt-1">
             <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
@@ -192,13 +202,14 @@ export default function CreateVenuePage() {
                   className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-green-500"
                   onChange={previewImage}
                 />
-                {imagePreviewUrl && (
+                {imagePreviewUrls.map((imageUrl, index) => (
                   <img
-                    src={imagePreviewUrl}
+                    key={index}
+                    src={imageUrl}
                     alt="Image Preview"
                     className="mt-2 rounded-md"
                   />
-                )}
+                ))}
               </div>
               <div className="flex justify-end mt-4">
                 <button
@@ -428,6 +439,7 @@ export default function CreateVenuePage() {
                     className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-green-500"
                     value={formData.location.lng}
                     onChange={handleInputChange}
+                    required
                   />
                 </div>
                 <div>
@@ -444,6 +456,7 @@ export default function CreateVenuePage() {
                     className="w-full p-2 mt-2 border rounded-md border-gray-300 focus:outline-none focus:border-green-500"
                     value={formData.location.lat}
                     onChange={handleInputChange}
+                    required
                   />
                 </div>
               </div>

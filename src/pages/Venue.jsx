@@ -5,8 +5,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Typography } from "@material-tailwind/react";
 import { Rating } from "@material-tailwind/react";
 import PropTypes from "prop-types";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { FaWifi, FaParking, FaCoffee, FaDog } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaArrowRight,
+  FaWifi,
+  FaParking,
+  FaCoffee,
+  FaDog,
+} from "react-icons/fa";
 
 const initialVenueState = {
   id: "",
@@ -74,6 +80,9 @@ const VenuePage = ({ onBook }) => {
         if (response.ok) {
           const data = await response.json();
           setVenue(data);
+          if (!data.owner.avatar) {
+            fetchRandomImage();
+          }
         } else {
           console.error(`Failed to fetch venue. Status: ${response.status}`);
         }
@@ -100,6 +109,29 @@ const VenuePage = ({ onBook }) => {
 
     calculateTotalPrice();
   }, [checkInDate, checkOutDate, totalGuests, venue.price]);
+
+  const fetchRandomImage = async () => {
+    try {
+      const response = await fetch(
+        `https://source.unsplash.com/random/800x600/?nature,water`
+      );
+
+      if (response.ok) {
+        const imageUrl = response.url;
+        setVenue((prevVenue) => ({
+          ...prevVenue,
+          owner: {
+            ...prevVenue.owner,
+            avatar: imageUrl,
+          },
+        }));
+      } else {
+        console.error("Failed to fetch random image.");
+      }
+    } catch (error) {
+      console.error("Error fetching random image:", error);
+    }
+  };
 
   const handleReserveClick = async () => {
     try {
@@ -226,10 +258,6 @@ const VenuePage = ({ onBook }) => {
             <h1 className="text-3xl font-bold mb-2 mt-8 text-black">
               {venue.name}
             </h1>
-            <p className="mb-2 text-black">Owner: {venue.owner.name}</p>
-            <p className="mb-2 text-black">Email: {venue.owner.email}</p>
-            <p className="mb-2 text-black">Created: {venue.created}</p>
-            <p className="mb-2 text-black">Updated: {venue.updated}</p>
             <p className="mb-2 text-black">Info: {venue.description}</p>
             <p className="mb-2 text-black">Rating: {venue.rating}</p>
             <p className="mb-2 text-black">Price: {venue.price}kr per night</p>
@@ -271,8 +299,6 @@ const VenuePage = ({ onBook }) => {
                 <p>Date From: {booking.dateFrom}</p>
                 <p>Date To: {booking.dateTo}</p>
                 <p>Guests: {booking.guests}</p>
-                <p>Created: {booking.created}</p>
-                <p>Updated: {booking.updated}</p>
               </div>
             ))}
             {venue.bookings.length > 1 && (
@@ -330,6 +356,25 @@ const VenuePage = ({ onBook }) => {
               </button>
             </div>
           </div>
+        </div>
+        <div className="rounded-xl max-w-96 bg-white text-black shadow-lg p-6 mb-4">
+          <div className="mb-2 text-black font-bold">Owner Information</div>
+          <img
+            src={
+              venue.owner.avatar ||
+              "https://source.unsplash.com/random/800x600/?person"
+            }
+            alt={venue.owner.name}
+            className="w-12 h-12 rounded-full mr-3 mb-3 md:mb-0 md:mr-0"
+          />
+          <div className="flex flex-wrap items-center mb-2">
+            <div className="flex flex-col">
+              <p className="mb-1">Owner: {venue.owner.name}</p>
+              <p className="mb-1">Email: {venue.owner.email}</p>
+            </div>
+          </div>
+          <p className="mb-2 text-black">Created: {venue.created}</p>
+          <p className="mb-2 text-black">Updated: {venue.updated}</p>
         </div>
 
         <div className="mt-10">

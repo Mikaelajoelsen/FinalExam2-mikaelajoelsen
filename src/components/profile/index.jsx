@@ -33,9 +33,7 @@ const ProfilePage = () => {
         );
 
         if (!response.ok) {
-          throw new Error(
-            `Failed to fetch user profile. Status: ${response.status}`
-          );
+          throw new Error(`Sign In To See Your Profile${response.status}`);
         }
 
         const responseData = await response.json();
